@@ -7,12 +7,16 @@ from __future__ import annotations
 
 from pydantic import Field
 
+from ..types import StickerType
 from ..base_object import BaseObject
 
 
 class GetTrendingStickerSets(BaseObject):
     """
     Returns a list of trending sticker sets. For optimal performance, the number of returned sticker sets is chosen by TDLib
+    
+    :param sticker_type: Type of the sticker sets to return
+    :type sticker_type: :class:`StickerType`
     
     :param offset: The offset from which to return the sticker sets; must be non-negative
     :type offset: :class:`int`
@@ -23,6 +27,7 @@ class GetTrendingStickerSets(BaseObject):
     """
 
     ID: str = Field("getTrendingStickerSets", alias="@type")
+    sticker_type: StickerType
     offset: int
     limit: int
 

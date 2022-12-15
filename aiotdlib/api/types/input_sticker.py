@@ -8,7 +8,8 @@ from __future__ import annotations
 from pydantic import Field
 
 from .input_file import InputFile
-from .sticker_type import StickerType
+from .mask_position import MaskPosition
+from .sticker_format import StickerFormat
 from ..base_object import BaseObject
 
 
@@ -22,15 +23,19 @@ class InputSticker(BaseObject):
     :param emojis: Emojis corresponding to the sticker
     :type emojis: :class:`str`
     
-    :param type_: Sticker type
-    :type type_: :class:`StickerType`
+    :param format: Sticker format
+    :type format: :class:`StickerFormat`
+    
+    :param mask_position: Position where the mask is placed; pass null if not specified
+    :type mask_position: :class:`MaskPosition`
     
     """
 
     ID: str = Field("inputSticker", alias="@type")
     sticker: InputFile
     emojis: str
-    type_: StickerType = Field(..., alias='type')
+    format: StickerFormat
+    mask_position: MaskPosition
 
     @staticmethod
     def read(q: dict) -> InputSticker:

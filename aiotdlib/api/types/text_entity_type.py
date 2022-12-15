@@ -84,6 +84,23 @@ class TextEntityTypeCode(TextEntityType):
         return TextEntityTypeCode.construct(**q)
 
 
+class TextEntityTypeCustomEmoji(TextEntityType):
+    """
+    A custom emoji. The text behind a custom emoji must be an emoji. Only premium users can use premium custom emoji
+    
+    :param custom_emoji_id: Unique identifier of the custom emoji
+    :type custom_emoji_id: :class:`int`
+    
+    """
+
+    ID: str = Field("textEntityTypeCustomEmoji", alias="@type")
+    custom_emoji_id: int
+
+    @staticmethod
+    def read(q: dict) -> TextEntityTypeCustomEmoji:
+        return TextEntityTypeCustomEmoji.construct(**q)
+
+
 class TextEntityTypeEmailAddress(TextEntityType):
     """
     An email address
@@ -142,7 +159,7 @@ class TextEntityTypeMediaTimestamp(TextEntityType):
 
 class TextEntityTypeMention(TextEntityType):
     """
-    A mention of a user by their username
+    A mention of a user, a supergroup, or a channel by their username
     
     """
 
@@ -215,7 +232,7 @@ class TextEntityTypePreCode(TextEntityType):
 
 class TextEntityTypeSpoiler(TextEntityType):
     """
-    A spoiler text. Not supported in secret chats
+    A spoiler text
     
     """
 

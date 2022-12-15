@@ -18,7 +18,7 @@ class GetPassportElement(BaseObject):
     :param type_: Telegram Passport element type
     :type type_: :class:`PassportElementType`
     
-    :param password: Password of the current user
+    :param password: The 2-step verification password of the current user
     :type password: :class:`str`
     
     """

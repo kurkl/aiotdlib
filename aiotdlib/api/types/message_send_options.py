@@ -24,6 +24,9 @@ class MessageSendOptions(BaseObject):
     :param protect_content: Pass true if the content of the message must be protected from forwarding and saving; for bots only
     :type protect_content: :class:`bool`
     
+    :param update_order_of_installed_sticker_sets: Pass true if the user explicitly chosen a sticker or a custom emoji from an installed sticker set; applicable only to sendMessage and sendMessageAlbum
+    :type update_order_of_installed_sticker_sets: :class:`bool`
+    
     :param scheduling_state: Message scheduling state; pass null to send message immediately. Messages sent to a secret chat, live location messages and self-destructing messages can't be scheduled
     :type scheduling_state: :class:`MessageSchedulingState`
     
@@ -33,6 +36,7 @@ class MessageSendOptions(BaseObject):
     disable_notification: bool
     from_background: bool
     protect_content: bool
+    update_order_of_installed_sticker_sets: bool
     scheduling_state: MessageSchedulingState
 
     @staticmethod

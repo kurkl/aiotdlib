@@ -20,6 +20,7 @@ from .authentication_code_type import (
     AuthenticationCodeType,
     AuthenticationCodeTypeCall,
     AuthenticationCodeTypeFlashCall,
+    AuthenticationCodeTypeFragment,
     AuthenticationCodeTypeMissedCall,
     AuthenticationCodeTypeSms,
     AuthenticationCodeTypeTelegramMessage,
@@ -31,7 +32,8 @@ from .authorization_state import (
     AuthorizationStateLoggingOut,
     AuthorizationStateReady,
     AuthorizationStateWaitCode,
-    AuthorizationStateWaitEncryptionKey,
+    AuthorizationStateWaitEmailAddress,
+    AuthorizationStateWaitEmailCode,
     AuthorizationStateWaitOtherDeviceConfirmation,
     AuthorizationStateWaitPassword,
     AuthorizationStateWaitPhoneNumber,
@@ -158,17 +160,31 @@ from .chat_action_bar import (
 from .chat_administrator import ChatAdministrator
 from .chat_administrator_rights import ChatAdministratorRights
 from .chat_administrators import ChatAdministrators
+from .chat_available_reactions import (
+    ChatAvailableReactions,
+    ChatAvailableReactionsAll,
+    ChatAvailableReactionsSome,
+)
 from .chat_event import ChatEvent
 from .chat_event_action import (
     ChatEventAction,
+    ChatEventActiveUsernamesChanged,
     ChatEventAvailableReactionsChanged,
     ChatEventDescriptionChanged,
+    ChatEventForumTopicCreated,
+    ChatEventForumTopicDeleted,
+    ChatEventForumTopicEdited,
+    ChatEventForumTopicPinned,
+    ChatEventForumTopicToggleIsClosed,
+    ChatEventForumTopicToggleIsHidden,
     ChatEventHasProtectedContentToggled,
     ChatEventInviteLinkDeleted,
     ChatEventInviteLinkEdited,
     ChatEventInviteLinkRevoked,
     ChatEventInvitesToggled,
+    ChatEventIsAggressiveAntiSpamEnabledToggled,
     ChatEventIsAllHistoryAvailableToggled,
+    ChatEventIsForumToggled,
     ChatEventLinkedChatChanged,
     ChatEventLocationChanged,
     ChatEventMemberInvited,
@@ -240,6 +256,8 @@ from .chat_members_filter import (
     ChatMembersFilterMention,
     ChatMembersFilterRestricted,
 )
+from .chat_message_sender import ChatMessageSender
+from .chat_message_senders import ChatMessageSenders
 from .chat_nearby import ChatNearby
 from .chat_notification_settings import ChatNotificationSettings
 from .chat_permissions import ChatPermissions
@@ -287,10 +305,11 @@ from .chats_nearby import ChatsNearby
 from .check_chat_username_result import (
     CheckChatUsernameResult,
     CheckChatUsernameResultOk,
-    CheckChatUsernameResultPublicChatsTooMuch,
+    CheckChatUsernameResultPublicChatsTooMany,
     CheckChatUsernameResultPublicGroupsUnavailable,
     CheckChatUsernameResultUsernameInvalid,
     CheckChatUsernameResultUsernameOccupied,
+    CheckChatUsernameResultUsernamePurchasable,
 )
 from .check_sticker_set_name_result import (
     CheckStickerSetNameResult,
@@ -341,7 +360,16 @@ from .dice_stickers import (
 from .document import Document
 from .downloaded_file_counts import DownloadedFileCounts
 from .draft_message import DraftMessage
+from .email_address_authentication import (
+    EmailAddressAuthentication,
+    EmailAddressAuthenticationAppleId,
+    EmailAddressAuthenticationCode,
+    EmailAddressAuthenticationGoogleId,
+)
 from .email_address_authentication_code_info import EmailAddressAuthenticationCodeInfo
+from .emoji_reaction import EmojiReaction
+from .emoji_status import EmojiStatus
+from .emoji_statuses import EmojiStatuses
 from .emojis import Emojis
 from .encrypted_credentials import EncryptedCredentials
 from .encrypted_passport_element import EncryptedPassportElement
@@ -371,6 +399,10 @@ from .file_type import (
     FileTypeWallpaper,
 )
 from .formatted_text import FormattedText
+from .forum_topic import ForumTopic
+from .forum_topic_icon import ForumTopicIcon
+from .forum_topic_info import ForumTopicInfo
+from .forum_topics import ForumTopics
 from .found_file_downloads import FoundFileDownloads
 from .found_messages import FoundMessages
 from .game import Game
@@ -470,10 +502,10 @@ from .input_invoice import (
     InputInvoiceName,
 )
 from .input_message_content import (
+    InputMessageContent,
     InputMessageAnimation,
     InputMessageAudio,
     InputMessageContact,
-    InputMessageContent,
     InputMessageDice,
     InputMessageDocument,
     InputMessageForwarded,
@@ -534,6 +566,7 @@ from .internal_link_type import (
     InternalLinkTypeChatInvite,
     InternalLinkTypeFilterSettings,
     InternalLinkTypeGame,
+    InternalLinkTypeInstantView,
     InternalLinkTypeInvoice,
     InternalLinkTypeLanguagePack,
     InternalLinkTypeLanguageSettings,
@@ -546,6 +579,7 @@ from .internal_link_type import (
     InternalLinkTypeProxy,
     InternalLinkTypePublicChat,
     InternalLinkTypeQrCodeAuthentication,
+    InternalLinkTypeRestorePurchases,
     InternalLinkTypeSettings,
     InternalLinkTypeStickerSet,
     InternalLinkTypeTheme,
@@ -553,11 +587,11 @@ from .internal_link_type import (
     InternalLinkTypeUnknownDeepLink,
     InternalLinkTypeUnsupportedProxy,
     InternalLinkTypeUserPhoneNumber,
+    InternalLinkTypeUserToken,
     InternalLinkTypeVideoChat,
 )
 from .invoice import Invoice
 from .json_value import (
-    JsonObjectMember,
     JsonValue,
     JsonValueArray,
     JsonValueBoolean,
@@ -565,6 +599,7 @@ from .json_value import (
     JsonValueNumber,
     JsonValueObject,
     JsonValueString,
+    JsonObjectMember,
 )
 from .keyboard_button import KeyboardButton
 from .keyboard_button_type import (
@@ -613,6 +648,7 @@ from .message import Message
 from .message_calendar import MessageCalendar
 from .message_calendar_day import MessageCalendarDay
 from .message_content import (
+    MessageContent,
     MessageAnimatedEmoji,
     MessageAnimation,
     MessageAudio,
@@ -631,14 +667,18 @@ from .message_content import (
     MessageChatUpgradeTo,
     MessageContact,
     MessageContactRegistered,
-    MessageContent,
     MessageCustomServiceAction,
     MessageDice,
     MessageDocument,
     MessageExpiredPhoto,
     MessageExpiredVideo,
+    MessageForumTopicCreated,
+    MessageForumTopicEdited,
+    MessageForumTopicIsClosedToggled,
+    MessageForumTopicIsHiddenToggled,
     MessageGame,
     MessageGameScore,
+    MessageGiftedPremium,
     MessageInviteVideoChatParticipants,
     MessageInvoice,
     MessageLocation,
@@ -667,6 +707,13 @@ from .message_content import (
     MessageWebsiteConnected,
 )
 from .message_copy_options import MessageCopyOptions
+from .message_extended_media import (
+    MessageExtendedMedia,
+    MessageExtendedMediaPhoto,
+    MessageExtendedMediaPreview,
+    MessageExtendedMediaUnsupported,
+    MessageExtendedMediaVideo,
+)
 from .message_file_type import (
     MessageFileType,
     MessageFileTypeGroup,
@@ -708,6 +755,7 @@ from .message_sending_state import (
 )
 from .message_statistics import MessageStatistics
 from .message_thread_info import MessageThreadInfo
+from .message_ttl import MessageTtl
 from .messages import Messages
 from .minithumbnail import Minithumbnail
 from .network_statistics import NetworkStatistics
@@ -775,7 +823,6 @@ from .page_block import (
     PageBlockHeader,
     PageBlockKicker,
     PageBlockList,
-    PageBlockListItem,
     PageBlockMap,
     PageBlockParagraph,
     PageBlockPhoto,
@@ -789,6 +836,7 @@ from .page_block import (
     PageBlockTitle,
     PageBlockVideo,
     PageBlockVoiceNote,
+    PageBlockListItem,
 )
 from .page_block_caption import PageBlockCaption
 from .page_block_horizontal_alignment import (
@@ -857,6 +905,7 @@ from .passport_required_element import PassportRequiredElement
 from .passport_suitable_element import PassportSuitableElement
 from .password_state import PasswordState
 from .payment_form import PaymentForm
+from .payment_option import PaymentOption
 from .payment_provider import (
     PaymentProvider,
     PaymentProviderOther,
@@ -884,7 +933,10 @@ from .premium_feature import (
     PremiumFeatureAdvancedChatManagement,
     PremiumFeatureAnimatedProfilePhoto,
     PremiumFeatureAppIcons,
+    PremiumFeatureCustomEmoji,
     PremiumFeatureDisabledAds,
+    PremiumFeatureEmojiStatus,
+    PremiumFeatureForumTopicIcon,
     PremiumFeatureImprovedDownloadSpeed,
     PremiumFeatureIncreasedLimits,
     PremiumFeatureIncreasedUploadFileSize,
@@ -909,6 +961,7 @@ from .premium_limit_type import (
     PremiumLimitTypeSavedAnimationCount,
     PremiumLimitTypeSupergroupCount,
 )
+from .premium_payment_option import PremiumPaymentOption
 from .premium_source import (
     PremiumSource,
     PremiumSourceFeature,
@@ -964,7 +1017,11 @@ from .push_message_content import (
     PushMessageContentVoiceNote,
 )
 from .push_receiver_id import PushReceiverId
-from .reaction import Reaction
+from .reaction_type import (
+    ReactionType,
+    ReactionTypeCustomEmoji,
+    ReactionTypeEmoji,
+)
 from .recommended_chat_filter import RecommendedChatFilter
 from .recommended_chat_filters import RecommendedChatFilters
 from .recovery_email_address import RecoveryEmailAddress
@@ -1057,7 +1114,14 @@ from .session_type import (
 )
 from .sessions import Sessions
 from .shipping_option import ShippingOption
+from .speech_recognition_result import (
+    SpeechRecognitionResult,
+    SpeechRecognitionResultError,
+    SpeechRecognitionResultPending,
+    SpeechRecognitionResultText,
+)
 from .sponsored_message import SponsoredMessage
+from .sponsored_messages import SponsoredMessages
 from .statistical_graph import (
     StatisticalGraph,
     StatisticalGraphAsync,
@@ -1066,21 +1130,31 @@ from .statistical_graph import (
 )
 from .statistical_value import StatisticalValue
 from .sticker import Sticker
+from .sticker_format import (
+    StickerFormat,
+    StickerFormatTgs,
+    StickerFormatWebm,
+    StickerFormatWebp,
+)
 from .sticker_set import StickerSet
 from .sticker_set_info import StickerSetInfo
 from .sticker_sets import StickerSets
 from .sticker_type import (
     StickerType,
-    StickerTypeAnimated,
+    StickerTypeCustomEmoji,
     StickerTypeMask,
-    StickerTypeStatic,
-    StickerTypeVideo,
+    StickerTypeRegular,
 )
 from .stickers import Stickers
 from .storage_statistics import StorageStatistics
 from .storage_statistics_by_chat import StorageStatisticsByChat
 from .storage_statistics_by_file_type import StorageStatisticsByFileType
 from .storage_statistics_fast import StorageStatisticsFast
+from .store_payment_purpose import (
+    StorePaymentPurpose,
+    StorePaymentPurposeGiftedPremium,
+    StorePaymentPurposePremiumSubscription,
+)
 from .suggested_action import (
     SuggestedAction,
     SuggestedActionCheckPassword,
@@ -1118,7 +1192,6 @@ from .target_chat import (
     TargetChatCurrent,
     TargetChatInternalLink,
 )
-from .tdlib_parameters import TdlibParameters
 from .temporary_password_state import TemporaryPasswordState
 from .terms_of_service import TermsOfService
 from .test_bytes import TestBytes
@@ -1138,6 +1211,7 @@ from .text_entity_type import (
     TextEntityTypeBotCommand,
     TextEntityTypeCashtag,
     TextEntityTypeCode,
+    TextEntityTypeCustomEmoji,
     TextEntityTypeEmailAddress,
     TextEntityTypeHashtag,
     TextEntityTypeItalic,
@@ -1185,6 +1259,7 @@ from .trending_sticker_sets import TrendingStickerSets
 from .unread_reaction import UnreadReaction
 from .update import (
     Update,
+    UpdateActiveEmojiReactions,
     UpdateActiveNotifications,
     UpdateAnimatedEmojiMessageClicked,
     UpdateAnimationSearchParameters,
@@ -1223,6 +1298,7 @@ from .update import (
     UpdateChatUnreadReactionCount,
     UpdateChatVideoChat,
     UpdateConnectionState,
+    UpdateDefaultReactionType,
     UpdateDeleteMessages,
     UpdateDiceEmojis,
     UpdateFavoriteStickers,
@@ -1233,6 +1309,7 @@ from .update import (
     UpdateFileGenerationStart,
     UpdateFileGenerationStop,
     UpdateFileRemovedFromDownloads,
+    UpdateForumTopicInfo,
     UpdateGroupCall,
     UpdateGroupCallParticipant,
     UpdateHavePendingNotifications,
@@ -1266,7 +1343,6 @@ from .update import (
     UpdateOption,
     UpdatePoll,
     UpdatePollAnswer,
-    UpdateReactions,
     UpdateRecentStickers,
     UpdateSavedAnimations,
     UpdateSavedNotificationSounds,
@@ -1292,12 +1368,14 @@ from .update import (
 from .updates import Updates
 from .user import User
 from .user_full_info import UserFullInfo
+from .user_link import UserLink
 from .user_privacy_setting import (
     UserPrivacySetting,
     UserPrivacySettingAllowCalls,
     UserPrivacySettingAllowChatInvites,
     UserPrivacySettingAllowFindingByPhoneNumber,
     UserPrivacySettingAllowPeerToPeerCalls,
+    UserPrivacySettingAllowPrivateVoiceAndVideoNoteMessages,
     UserPrivacySettingShowLinkInForwardedMessages,
     UserPrivacySettingShowPhoneNumber,
     UserPrivacySettingShowProfilePhoto,
@@ -1324,6 +1402,7 @@ from .user_status import (
     UserStatusOnline,
     UserStatusRecently,
 )
+from .user_support_info import UserSupportInfo
 from .user_type import (
     UserType,
     UserTypeBot,
@@ -1331,6 +1410,7 @@ from .user_type import (
     UserTypeRegular,
     UserTypeUnknown,
 )
+from .usernames import Usernames
 from .users import Users
 from .validated_order_info import ValidatedOrderInfo
 from .vector_path_command import (
@@ -1346,6 +1426,7 @@ from .voice_note import VoiceNote
 from .web_app_info import WebAppInfo
 from .web_page import WebPage
 from .web_page_instant_view import WebPageInstantView
+
 
 __all__ = [
     "AccountTtl",
@@ -1363,6 +1444,7 @@ __all__ = [
     "AuthenticationCodeType",
     "AuthenticationCodeTypeCall",
     "AuthenticationCodeTypeFlashCall",
+    "AuthenticationCodeTypeFragment",
     "AuthenticationCodeTypeMissedCall",
     "AuthenticationCodeTypeSms",
     "AuthenticationCodeTypeTelegramMessage",
@@ -1372,7 +1454,8 @@ __all__ = [
     "AuthorizationStateLoggingOut",
     "AuthorizationStateReady",
     "AuthorizationStateWaitCode",
-    "AuthorizationStateWaitEncryptionKey",
+    "AuthorizationStateWaitEmailAddress",
+    "AuthorizationStateWaitEmailCode",
     "AuthorizationStateWaitOtherDeviceConfirmation",
     "AuthorizationStateWaitPassword",
     "AuthorizationStateWaitPhoneNumber",
@@ -1476,16 +1559,28 @@ __all__ = [
     "ChatAdministrator",
     "ChatAdministratorRights",
     "ChatAdministrators",
+    "ChatAvailableReactions",
+    "ChatAvailableReactionsAll",
+    "ChatAvailableReactionsSome",
     "ChatEvent",
     "ChatEventAction",
+    "ChatEventActiveUsernamesChanged",
     "ChatEventAvailableReactionsChanged",
     "ChatEventDescriptionChanged",
+    "ChatEventForumTopicCreated",
+    "ChatEventForumTopicDeleted",
+    "ChatEventForumTopicEdited",
+    "ChatEventForumTopicPinned",
+    "ChatEventForumTopicToggleIsClosed",
+    "ChatEventForumTopicToggleIsHidden",
     "ChatEventHasProtectedContentToggled",
     "ChatEventInviteLinkDeleted",
     "ChatEventInviteLinkEdited",
     "ChatEventInviteLinkRevoked",
     "ChatEventInvitesToggled",
+    "ChatEventIsAggressiveAntiSpamEnabledToggled",
     "ChatEventIsAllHistoryAvailableToggled",
+    "ChatEventIsForumToggled",
     "ChatEventLinkedChatChanged",
     "ChatEventLocationChanged",
     "ChatEventMemberInvited",
@@ -1550,6 +1645,8 @@ __all__ = [
     "ChatMembersFilterMembers",
     "ChatMembersFilterMention",
     "ChatMembersFilterRestricted",
+    "ChatMessageSender",
+    "ChatMessageSenders",
     "ChatNearby",
     "ChatNotificationSettings",
     "ChatPermissions",
@@ -1588,10 +1685,11 @@ __all__ = [
     "ChatsNearby",
     "CheckChatUsernameResult",
     "CheckChatUsernameResultOk",
-    "CheckChatUsernameResultPublicChatsTooMuch",
+    "CheckChatUsernameResultPublicChatsTooMany",
     "CheckChatUsernameResultPublicGroupsUnavailable",
     "CheckChatUsernameResultUsernameInvalid",
     "CheckChatUsernameResultUsernameOccupied",
+    "CheckChatUsernameResultUsernamePurchasable",
     "CheckStickerSetNameResult",
     "CheckStickerSetNameResultNameInvalid",
     "CheckStickerSetNameResultNameOccupied",
@@ -1633,7 +1731,14 @@ __all__ = [
     "Document",
     "DownloadedFileCounts",
     "DraftMessage",
+    "EmailAddressAuthentication",
+    "EmailAddressAuthenticationAppleId",
+    "EmailAddressAuthenticationCode",
+    "EmailAddressAuthenticationGoogleId",
     "EmailAddressAuthenticationCodeInfo",
+    "EmojiReaction",
+    "EmojiStatus",
+    "EmojiStatuses",
     "Emojis",
     "EncryptedCredentials",
     "EncryptedPassportElement",
@@ -1661,6 +1766,10 @@ __all__ = [
     "FileTypeVoiceNote",
     "FileTypeWallpaper",
     "FormattedText",
+    "ForumTopic",
+    "ForumTopicIcon",
+    "ForumTopicInfo",
+    "ForumTopics",
     "FoundFileDownloads",
     "FoundMessages",
     "Game",
@@ -1799,6 +1908,7 @@ __all__ = [
     "InternalLinkTypeChatInvite",
     "InternalLinkTypeFilterSettings",
     "InternalLinkTypeGame",
+    "InternalLinkTypeInstantView",
     "InternalLinkTypeInvoice",
     "InternalLinkTypeLanguagePack",
     "InternalLinkTypeLanguageSettings",
@@ -1811,6 +1921,7 @@ __all__ = [
     "InternalLinkTypeProxy",
     "InternalLinkTypePublicChat",
     "InternalLinkTypeQrCodeAuthentication",
+    "InternalLinkTypeRestorePurchases",
     "InternalLinkTypeSettings",
     "InternalLinkTypeStickerSet",
     "InternalLinkTypeTheme",
@@ -1818,6 +1929,7 @@ __all__ = [
     "InternalLinkTypeUnknownDeepLink",
     "InternalLinkTypeUnsupportedProxy",
     "InternalLinkTypeUserPhoneNumber",
+    "InternalLinkTypeUserToken",
     "InternalLinkTypeVideoChat",
     "Invoice",
     "JsonValue",
@@ -1888,8 +2000,13 @@ __all__ = [
     "MessageDocument",
     "MessageExpiredPhoto",
     "MessageExpiredVideo",
+    "MessageForumTopicCreated",
+    "MessageForumTopicEdited",
+    "MessageForumTopicIsClosedToggled",
+    "MessageForumTopicIsHiddenToggled",
     "MessageGame",
     "MessageGameScore",
+    "MessageGiftedPremium",
     "MessageInviteVideoChatParticipants",
     "MessageInvoice",
     "MessageLocation",
@@ -1917,6 +2034,11 @@ __all__ = [
     "MessageWebAppDataSent",
     "MessageWebsiteConnected",
     "MessageCopyOptions",
+    "MessageExtendedMedia",
+    "MessageExtendedMediaPhoto",
+    "MessageExtendedMediaPreview",
+    "MessageExtendedMediaUnsupported",
+    "MessageExtendedMediaVideo",
     "MessageFileType",
     "MessageFileTypeGroup",
     "MessageFileTypePrivate",
@@ -1948,6 +2070,7 @@ __all__ = [
     "MessageSendingStatePending",
     "MessageStatistics",
     "MessageThreadInfo",
+    "MessageTtl",
     "Messages",
     "Minithumbnail",
     "NetworkStatistics",
@@ -2073,6 +2196,7 @@ __all__ = [
     "PassportSuitableElement",
     "PasswordState",
     "PaymentForm",
+    "PaymentOption",
     "PaymentProvider",
     "PaymentProviderOther",
     "PaymentProviderSmartGlocal",
@@ -2095,7 +2219,10 @@ __all__ = [
     "PremiumFeatureAdvancedChatManagement",
     "PremiumFeatureAnimatedProfilePhoto",
     "PremiumFeatureAppIcons",
+    "PremiumFeatureCustomEmoji",
     "PremiumFeatureDisabledAds",
+    "PremiumFeatureEmojiStatus",
+    "PremiumFeatureForumTopicIcon",
     "PremiumFeatureImprovedDownloadSpeed",
     "PremiumFeatureIncreasedLimits",
     "PremiumFeatureIncreasedUploadFileSize",
@@ -2117,6 +2244,7 @@ __all__ = [
     "PremiumLimitTypePinnedChatCount",
     "PremiumLimitTypeSavedAnimationCount",
     "PremiumLimitTypeSupergroupCount",
+    "PremiumPaymentOption",
     "PremiumSource",
     "PremiumSourceFeature",
     "PremiumSourceLimitExceeded",
@@ -2164,7 +2292,9 @@ __all__ = [
     "PushMessageContentVideoNote",
     "PushMessageContentVoiceNote",
     "PushReceiverId",
-    "Reaction",
+    "ReactionType",
+    "ReactionTypeCustomEmoji",
+    "ReactionTypeEmoji",
     "RecommendedChatFilter",
     "RecommendedChatFilters",
     "RecoveryEmailAddress",
@@ -2245,26 +2375,37 @@ __all__ = [
     "SessionTypeXbox",
     "Sessions",
     "ShippingOption",
+    "SpeechRecognitionResult",
+    "SpeechRecognitionResultError",
+    "SpeechRecognitionResultPending",
+    "SpeechRecognitionResultText",
     "SponsoredMessage",
+    "SponsoredMessages",
     "StatisticalGraph",
     "StatisticalGraphAsync",
     "StatisticalGraphData",
     "StatisticalGraphError",
     "StatisticalValue",
     "Sticker",
+    "StickerFormat",
+    "StickerFormatTgs",
+    "StickerFormatWebm",
+    "StickerFormatWebp",
     "StickerSet",
     "StickerSetInfo",
     "StickerSets",
     "StickerType",
-    "StickerTypeAnimated",
+    "StickerTypeCustomEmoji",
     "StickerTypeMask",
-    "StickerTypeStatic",
-    "StickerTypeVideo",
+    "StickerTypeRegular",
     "Stickers",
     "StorageStatistics",
     "StorageStatisticsByChat",
     "StorageStatisticsByFileType",
     "StorageStatisticsFast",
+    "StorePaymentPurpose",
+    "StorePaymentPurposeGiftedPremium",
+    "StorePaymentPurposePremiumSubscription",
     "SuggestedAction",
     "SuggestedActionCheckPassword",
     "SuggestedActionCheckPhoneNumber",
@@ -2294,7 +2435,6 @@ __all__ = [
     "TargetChatChosen",
     "TargetChatCurrent",
     "TargetChatInternalLink",
-    "TdlibParameters",
     "TemporaryPasswordState",
     "TermsOfService",
     "TestBytes",
@@ -2313,6 +2453,7 @@ __all__ = [
     "TextEntityTypeBotCommand",
     "TextEntityTypeCashtag",
     "TextEntityTypeCode",
+    "TextEntityTypeCustomEmoji",
     "TextEntityTypeEmailAddress",
     "TextEntityTypeHashtag",
     "TextEntityTypeItalic",
@@ -2352,6 +2493,7 @@ __all__ = [
     "TrendingStickerSets",
     "UnreadReaction",
     "Update",
+    "UpdateActiveEmojiReactions",
     "UpdateActiveNotifications",
     "UpdateAnimatedEmojiMessageClicked",
     "UpdateAnimationSearchParameters",
@@ -2390,6 +2532,7 @@ __all__ = [
     "UpdateChatUnreadReactionCount",
     "UpdateChatVideoChat",
     "UpdateConnectionState",
+    "UpdateDefaultReactionType",
     "UpdateDeleteMessages",
     "UpdateDiceEmojis",
     "UpdateFavoriteStickers",
@@ -2400,6 +2543,7 @@ __all__ = [
     "UpdateFileGenerationStart",
     "UpdateFileGenerationStop",
     "UpdateFileRemovedFromDownloads",
+    "UpdateForumTopicInfo",
     "UpdateGroupCall",
     "UpdateGroupCallParticipant",
     "UpdateHavePendingNotifications",
@@ -2433,7 +2577,6 @@ __all__ = [
     "UpdateOption",
     "UpdatePoll",
     "UpdatePollAnswer",
-    "UpdateReactions",
     "UpdateRecentStickers",
     "UpdateSavedAnimations",
     "UpdateSavedNotificationSounds",
@@ -2458,11 +2601,13 @@ __all__ = [
     "Updates",
     "User",
     "UserFullInfo",
+    "UserLink",
     "UserPrivacySetting",
     "UserPrivacySettingAllowCalls",
     "UserPrivacySettingAllowChatInvites",
     "UserPrivacySettingAllowFindingByPhoneNumber",
     "UserPrivacySettingAllowPeerToPeerCalls",
+    "UserPrivacySettingAllowPrivateVoiceAndVideoNoteMessages",
     "UserPrivacySettingShowLinkInForwardedMessages",
     "UserPrivacySettingShowPhoneNumber",
     "UserPrivacySettingShowProfilePhoto",
@@ -2484,11 +2629,13 @@ __all__ = [
     "UserStatusOffline",
     "UserStatusOnline",
     "UserStatusRecently",
+    "UserSupportInfo",
     "UserType",
     "UserTypeBot",
     "UserTypeDeleted",
     "UserTypeRegular",
     "UserTypeUnknown",
+    "Usernames",
     "Users",
     "ValidatedOrderInfo",
     "VectorPathCommand",

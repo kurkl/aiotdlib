@@ -37,8 +37,11 @@ class Audio(BaseObject):
     :param album_cover_minithumbnail: The minithumbnail of the album cover; may be null, defaults to None
     :type album_cover_minithumbnail: :class:`Minithumbnail`, optional
     
-    :param album_cover_thumbnail: The thumbnail of the album cover in JPEG format; as defined by the sender. The full size thumbnail is supposed to be extracted from the downloaded file; may be null, defaults to None
+    :param album_cover_thumbnail: The thumbnail of the album cover in JPEG format; as defined by the sender. The full size thumbnail is supposed to be extracted from the downloaded audio file; may be null, defaults to None
     :type album_cover_thumbnail: :class:`Thumbnail`, optional
+    
+    :param external_album_covers: Album cover variants to use if the downloaded audio file contains no album cover. Provided thumbnail dimensions are approximate
+    :type external_album_covers: :class:`list[Thumbnail]`
     
     :param audio: File containing the audio
     :type audio: :class:`File`
@@ -53,6 +56,7 @@ class Audio(BaseObject):
     mime_type: str
     album_cover_minithumbnail: typing.Optional[Minithumbnail] = None
     album_cover_thumbnail: typing.Optional[Thumbnail] = None
+    external_album_covers: list[Thumbnail]
     audio: File
 
     @staticmethod

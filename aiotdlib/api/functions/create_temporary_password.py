@@ -14,7 +14,7 @@ class CreateTemporaryPassword(BaseObject):
     """
     Creates a new temporary password for processing payments
     
-    :param password: Persistent user password
+    :param password: The 2-step verification password of the current user
     :type password: :class:`str`
     
     :param valid_for: Time during which the temporary password will be valid, in seconds; must be between 60 and 86400

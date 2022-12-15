@@ -12,7 +12,7 @@ from ..base_object import BaseObject
 
 class RequestAuthenticationPasswordRecovery(BaseObject):
     """
-    Requests to send a password recovery code to an email address that was previously set up. Works only when the current authorization state is authorizationStateWaitPassword
+    Requests to send a 2-step verification password recovery code to an email address that was previously set up. Works only when the current authorization state is authorizationStateWaitPassword
     
     """
 

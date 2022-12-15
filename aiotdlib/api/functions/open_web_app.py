@@ -27,6 +27,12 @@ class OpenWebApp(BaseObject):
     :param theme: Preferred Web App theme; pass null to use the default theme
     :type theme: :class:`ThemeParameters`
     
+    :param application_name: Short name of the application; 0-64 English letters, digits, and underscores
+    :type application_name: :class:`str`
+    
+    :param message_thread_id: If not 0, a message thread identifier in which the message will be sent
+    :type message_thread_id: :class:`int`
+    
     :param reply_to_message_id: Identifier of the replied message for the message sent by the Web App; 0 if none
     :type reply_to_message_id: :class:`int`
     
@@ -37,6 +43,8 @@ class OpenWebApp(BaseObject):
     bot_user_id: int
     url: str
     theme: ThemeParameters
+    application_name: str
+    message_thread_id: int
     reply_to_message_id: int
 
     @staticmethod

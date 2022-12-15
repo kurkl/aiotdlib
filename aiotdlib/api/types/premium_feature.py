@@ -58,6 +58,19 @@ class PremiumFeatureAppIcons(PremiumFeature):
         return PremiumFeatureAppIcons.construct(**q)
 
 
+class PremiumFeatureCustomEmoji(PremiumFeature):
+    """
+    Allowed to use custom emoji stickers in message texts and captions
+    
+    """
+
+    ID: str = Field("premiumFeatureCustomEmoji", alias="@type")
+
+    @staticmethod
+    def read(q: dict) -> PremiumFeatureCustomEmoji:
+        return PremiumFeatureCustomEmoji.construct(**q)
+
+
 class PremiumFeatureDisabledAds(PremiumFeature):
     """
     Disabled ads
@@ -69,6 +82,32 @@ class PremiumFeatureDisabledAds(PremiumFeature):
     @staticmethod
     def read(q: dict) -> PremiumFeatureDisabledAds:
         return PremiumFeatureDisabledAds.construct(**q)
+
+
+class PremiumFeatureEmojiStatus(PremiumFeature):
+    """
+    A emoji status shown along with the user's name
+    
+    """
+
+    ID: str = Field("premiumFeatureEmojiStatus", alias="@type")
+
+    @staticmethod
+    def read(q: dict) -> PremiumFeatureEmojiStatus:
+        return PremiumFeatureEmojiStatus.construct(**q)
+
+
+class PremiumFeatureForumTopicIcon(PremiumFeature):
+    """
+    The ability to set a custom emoji as a forum topic icon
+    
+    """
+
+    ID: str = Field("premiumFeatureForumTopicIcon", alias="@type")
+
+    @staticmethod
+    def read(q: dict) -> PremiumFeatureForumTopicIcon:
+        return PremiumFeatureForumTopicIcon.construct(**q)
 
 
 class PremiumFeatureImprovedDownloadSpeed(PremiumFeature):

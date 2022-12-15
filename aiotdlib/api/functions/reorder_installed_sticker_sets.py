@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from pydantic import Field
 
+from ..types import StickerType
 from ..base_object import BaseObject
 
 
@@ -14,8 +15,8 @@ class ReorderInstalledStickerSets(BaseObject):
     """
     Changes the order of installed sticker sets
     
-    :param is_masks: Pass true to change the order of mask sticker sets; pass false to change the order of ordinary sticker sets
-    :type is_masks: :class:`bool`
+    :param sticker_type: Type of the sticker sets to reorder
+    :type sticker_type: :class:`StickerType`
     
     :param sticker_set_ids: Identifiers of installed sticker sets in the new correct order
     :type sticker_set_ids: :class:`list[int]`
@@ -23,7 +24,7 @@ class ReorderInstalledStickerSets(BaseObject):
     """
 
     ID: str = Field("reorderInstalledStickerSets", alias="@type")
-    is_masks: bool
+    sticker_type: StickerType
     sticker_set_ids: list[int]
 
     @staticmethod

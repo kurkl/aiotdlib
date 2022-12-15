@@ -17,10 +17,14 @@ class DeleteAccount(BaseObject):
     :param reason: The reason why the account was deleted; optional
     :type reason: :class:`str`
     
+    :param password: The 2-step verification password of the current user. If not specified, account deletion can be canceled within one week
+    :type password: :class:`str`
+    
     """
 
     ID: str = Field("deleteAccount", alias="@type")
     reason: str
+    password: str
 
     @staticmethod
     def read(q: dict) -> DeleteAccount:

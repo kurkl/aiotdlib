@@ -12,7 +12,7 @@ from ..base_object import BaseObject
 
 class CheckAuthenticationPasswordRecoveryCode(BaseObject):
     """
-    Checks whether a password recovery code sent to an email address is valid. Works only when the current authorization state is authorizationStateWaitPassword
+    Checks whether a 2-step verification password recovery code sent to an email address is valid. Works only when the current authorization state is authorizationStateWaitPassword
     
     :param recovery_code: Recovery code to check
     :type recovery_code: :class:`str`

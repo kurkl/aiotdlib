@@ -25,8 +25,8 @@ class MessageThreadInfo(BaseObject):
     :param message_thread_id: Message thread identifier, unique within the chat
     :type message_thread_id: :class:`int`
     
-    :param reply_info: Information about the message thread
-    :type reply_info: :class:`MessageReplyInfo`
+    :param reply_info: Information about the message thread; may be null for forum topic threads, defaults to None
+    :type reply_info: :class:`MessageReplyInfo`, optional
     
     :param unread_message_count: Approximate number of unread messages in the message thread
     :type unread_message_count: :class:`int`
@@ -42,7 +42,7 @@ class MessageThreadInfo(BaseObject):
     ID: str = Field("messageThreadInfo", alias="@type")
     chat_id: int
     message_thread_id: int
-    reply_info: MessageReplyInfo
+    reply_info: typing.Optional[MessageReplyInfo] = None
     unread_message_count: int
     messages: list[Message]
     draft_message: typing.Optional[DraftMessage] = None

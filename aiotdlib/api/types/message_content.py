@@ -20,8 +20,10 @@ from .document import Document
 from .encrypted_credentials import EncryptedCredentials
 from .encrypted_passport_element import EncryptedPassportElement
 from .formatted_text import FormattedText
+from .forum_topic_icon import ForumTopicIcon
 from .game import Game
 from .location import Location
+from .message_extended_media import MessageExtendedMedia
 from .message_sender import MessageSender
 from .order_info import OrderInfo
 from .passport_element_type import PassportElementType
@@ -289,10 +291,14 @@ class MessageChatSetTtl(MessageContent):
     :param ttl: New message TTL
     :type ttl: :class:`int`
     
+    :param from_user_id: If not 0, a user identifier, which default setting was automatically applied
+    :type from_user_id: :class:`int`
+    
     """
 
     ID: str = Field("messageChatSetTtl", alias="@type")
     ttl: int
+    from_user_id: int
 
     @staticmethod
     def read(q: dict) -> MessageChatSetTtl:
@@ -464,6 +470,86 @@ class MessageExpiredVideo(MessageContent):
         return MessageExpiredVideo.construct(**q)
 
 
+class MessageForumTopicCreated(MessageContent):
+    """
+    A forum topic has been created
+    
+    :param name: Name of the topic
+    :type name: :class:`str`
+    
+    :param icon: Icon of the topic
+    :type icon: :class:`ForumTopicIcon`
+    
+    """
+
+    ID: str = Field("messageForumTopicCreated", alias="@type")
+    name: str
+    icon: ForumTopicIcon
+
+    @staticmethod
+    def read(q: dict) -> MessageForumTopicCreated:
+        return MessageForumTopicCreated.construct(**q)
+
+
+class MessageForumTopicEdited(MessageContent):
+    """
+    A forum topic has been edited
+    
+    :param name: If non-empty, the new name of the topic
+    :type name: :class:`str`
+    
+    :param edit_icon_custom_emoji_id: True, if icon's custom_emoji_id is changed
+    :type edit_icon_custom_emoji_id: :class:`bool`
+    
+    :param icon_custom_emoji_id: New unique identifier of the custom emoji shown on the topic icon; 0 if none. Must be ignored if edit_icon_custom_emoji_id is false
+    :type icon_custom_emoji_id: :class:`int`
+    
+    """
+
+    ID: str = Field("messageForumTopicEdited", alias="@type")
+    name: str
+    edit_icon_custom_emoji_id: bool
+    icon_custom_emoji_id: int
+
+    @staticmethod
+    def read(q: dict) -> MessageForumTopicEdited:
+        return MessageForumTopicEdited.construct(**q)
+
+
+class MessageForumTopicIsClosedToggled(MessageContent):
+    """
+    A forum topic has been closed or opened
+    
+    :param is_closed: True, if the topic was closed, otherwise the topic was reopened
+    :type is_closed: :class:`bool`
+    
+    """
+
+    ID: str = Field("messageForumTopicIsClosedToggled", alias="@type")
+    is_closed: bool
+
+    @staticmethod
+    def read(q: dict) -> MessageForumTopicIsClosedToggled:
+        return MessageForumTopicIsClosedToggled.construct(**q)
+
+
+class MessageForumTopicIsHiddenToggled(MessageContent):
+    """
+    A General forum topic has been hidden or unhidden
+    
+    :param is_hidden: True, if the topic was hidden, otherwise the topic was unhidden
+    :type is_hidden: :class:`bool`
+    
+    """
+
+    ID: str = Field("messageForumTopicIsHiddenToggled", alias="@type")
+    is_hidden: bool
+
+    @staticmethod
+    def read(q: dict) -> MessageForumTopicIsHiddenToggled:
+        return MessageForumTopicIsHiddenToggled.construct(**q)
+
+
 class MessageGame(MessageContent):
     """
     A message with a game
@@ -504,6 +590,35 @@ class MessageGameScore(MessageContent):
     @staticmethod
     def read(q: dict) -> MessageGameScore:
         return MessageGameScore.construct(**q)
+
+
+class MessageGiftedPremium(MessageContent):
+    """
+    Telegram Premium was gifted to the user
+    
+    :param currency: Currency for the paid amount
+    :type currency: :class:`str`
+    
+    :param amount: The paid amount, in the smallest units of the currency
+    :type amount: :class:`int`
+    
+    :param month_count: Number of month the Telegram Premium subscription will be active
+    :type month_count: :class:`int`
+    
+    :param sticker: A sticker to be shown in the message; may be null if unknown, defaults to None
+    :type sticker: :class:`Sticker`, optional
+    
+    """
+
+    ID: str = Field("messageGiftedPremium", alias="@type")
+    currency: str
+    amount: int
+    month_count: int
+    sticker: typing.Optional[Sticker] = None
+
+    @staticmethod
+    def read(q: dict) -> MessageGiftedPremium:
+        return MessageGiftedPremium.construct(**q)
 
 
 class MessageInviteVideoChatParticipants(MessageContent):
@@ -558,6 +673,9 @@ class MessageInvoice(MessageContent):
     :param receipt_message_id: The identifier of the message with the receipt, after the product has been purchased
     :type receipt_message_id: :class:`int`
     
+    :param extended_media: Extended media attached to the invoice; may be null, defaults to None
+    :type extended_media: :class:`MessageExtendedMedia`, optional
+    
     """
 
     ID: str = Field("messageInvoice", alias="@type")
@@ -570,6 +688,7 @@ class MessageInvoice(MessageContent):
     is_test: bool
     need_shipping_address: bool
     receipt_message_id: int
+    extended_media: typing.Optional[MessageExtendedMedia] = None
 
     @staticmethod
     def read(q: dict) -> MessageInvoice:
@@ -651,7 +770,7 @@ class MessagePaymentSuccessful(MessageContent):
     """
     A payment has been completed
     
-    :param invoice_chat_id: Identifier of the chat, containing the corresponding invoice message; 0 if unknown
+    :param invoice_chat_id: Identifier of the chat, containing the corresponding invoice message
     :type invoice_chat_id: :class:`int`
     
     :param invoice_message_id: Identifier of the message with the corresponding invoice; can be 0 or an identifier of a deleted message

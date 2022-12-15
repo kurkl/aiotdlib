@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from pydantic import Field
 
+from ..types import ReactionType
 from ..base_object import BaseObject
 
 
@@ -20,8 +21,8 @@ class GetMessageAddedReactions(BaseObject):
     :param message_id: Identifier of the message
     :type message_id: :class:`int`
     
-    :param reaction: If non-empty, only added reactions with the specified text representation will be returned
-    :type reaction: :class:`str`
+    :param reaction_type: Type of the reactions to return; pass null to return all added reactions
+    :type reaction_type: :class:`ReactionType`
     
     :param offset: Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results
     :type offset: :class:`str`
@@ -34,7 +35,7 @@ class GetMessageAddedReactions(BaseObject):
     ID: str = Field("getMessageAddedReactions", alias="@type")
     chat_id: int
     message_id: int
-    reaction: str
+    reaction_type: ReactionType
     offset: str
     limit: int
 

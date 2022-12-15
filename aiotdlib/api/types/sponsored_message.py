@@ -31,6 +31,9 @@ class SponsoredMessage(BaseObject):
     :param sponsor_chat_info: Information about the sponsor chat; may be null unless sponsor_chat_id == 0, defaults to None
     :type sponsor_chat_info: :class:`ChatInviteLinkInfo`, optional
     
+    :param show_chat_photo: True, if the sponsor's chat photo must be shown
+    :type show_chat_photo: :class:`bool`
+    
     :param link: An internal link to be opened when the sponsored message is clicked; may be null if the sponsor chat needs to be opened instead, defaults to None
     :type link: :class:`InternalLinkType`, optional
     
@@ -44,6 +47,7 @@ class SponsoredMessage(BaseObject):
     is_recommended: bool
     sponsor_chat_id: int
     sponsor_chat_info: typing.Optional[ChatInviteLinkInfo] = None
+    show_chat_photo: bool
     link: typing.Optional[InternalLinkType] = None
     content: MessageContent
 

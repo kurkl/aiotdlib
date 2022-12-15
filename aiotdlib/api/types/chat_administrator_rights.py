@@ -38,6 +38,9 @@ class ChatAdministratorRights(BaseObject):
     :param can_pin_messages: True, if the administrator can pin messages; applicable to basic groups and supergroups only
     :type can_pin_messages: :class:`bool`
     
+    :param can_manage_topics: True, if the administrator can manage topics; applicable to forum supergroups only
+    :type can_manage_topics: :class:`bool`
+    
     :param can_promote_members: True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that were directly or indirectly promoted by them
     :type can_promote_members: :class:`bool`
     
@@ -58,6 +61,7 @@ class ChatAdministratorRights(BaseObject):
     can_invite_users: bool
     can_restrict_members: bool
     can_pin_messages: bool
+    can_manage_topics: bool
     can_promote_members: bool
     can_manage_video_chats: bool
     is_anonymous: bool

@@ -20,7 +20,7 @@ class SupergroupFullInfo(BaseObject):
     """
     Contains full information about a supergroup or channel
     
-    :param photo: Chat photo; may be null, defaults to None
+    :param photo: Chat photo; may be null if empty or unknown. If non-null, then it is the same photo as in chat.photo, defaults to None
     :type photo: :class:`ChatPhoto`, optional
     
     :param param_description: Supergroup or channel description
@@ -62,8 +62,11 @@ class SupergroupFullInfo(BaseObject):
     :param can_get_statistics: True, if the supergroup or channel statistics are available
     :type can_get_statistics: :class:`bool`
     
-    :param is_all_history_available: True, if new chat members will have access to old messages. In public or discussion groups and both public and private channels, old messages are always available, so this option affects only private supergroups without a linked chat. The value of this field is only available for chat administrators
+    :param is_all_history_available: True, if new chat members will have access to old messages. In public, discussion, of forum groups and all channels, old messages are always available, so this option affects only private non-forum supergroups without a linked chat. The value of this field is only available for chat administrators
     :type is_all_history_available: :class:`bool`
+    
+    :param is_aggressive_anti_spam_enabled: True, if aggressive anti-spam checks are enabled in the supergroup. The value of this field is only available for chat administrators
+    :type is_aggressive_anti_spam_enabled: :class:`bool`
     
     :param sticker_set_id: Identifier of the supergroup sticker set; 0 if none
     :type sticker_set_id: :class:`int`
@@ -101,6 +104,7 @@ class SupergroupFullInfo(BaseObject):
     can_set_location: bool
     can_get_statistics: bool
     is_all_history_available: bool
+    is_aggressive_anti_spam_enabled: bool
     sticker_set_id: int
     location: typing.Optional[ChatLocation] = None
     invite_link: typing.Optional[ChatInviteLink] = None

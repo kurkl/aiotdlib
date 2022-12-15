@@ -53,6 +53,27 @@ class AuthenticationCodeTypeFlashCall(AuthenticationCodeType):
         return AuthenticationCodeTypeFlashCall.construct(**q)
 
 
+class AuthenticationCodeTypeFragment(AuthenticationCodeType):
+    """
+    An authentication code is delivered to https://fragment.com. The user must be logged in there via a wallet owning the phone number's NFT
+    
+    :param url: URL to open to receive the code
+    :type url: :class:`str`
+    
+    :param length: Length of the code
+    :type length: :class:`int`
+    
+    """
+
+    ID: str = Field("authenticationCodeTypeFragment", alias="@type")
+    url: str
+    length: int
+
+    @staticmethod
+    def read(q: dict) -> AuthenticationCodeTypeFragment:
+        return AuthenticationCodeTypeFragment.construct(**q)
+
+
 class AuthenticationCodeTypeMissedCall(AuthenticationCodeType):
     """
     An authentication code is delivered by an immediately canceled call to the specified phone number. The last digits of the phone number that calls are the code that must be entered manually by the user

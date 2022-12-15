@@ -66,7 +66,7 @@ class Message(BaseObject):
     :param can_get_statistics: True, if the message statistics are available through getMessageStatistics
     :type can_get_statistics: :class:`bool`
     
-    :param can_get_message_thread: True, if information about the message thread is available through getMessageThread
+    :param can_get_message_thread: True, if information about the message thread is available through getMessageThread and getMessageThreadHistory
     :type can_get_message_thread: :class:`bool`
     
     :param can_get_viewers: True, if chat members already viewed the message can be received through getMessageViewers
@@ -75,11 +75,17 @@ class Message(BaseObject):
     :param can_get_media_timestamp_links: True, if media timestamp links can be generated for media timestamp entities in the message text, caption or web page description through getMessageLink
     :type can_get_media_timestamp_links: :class:`bool`
     
+    :param can_report_reactions: True, if reactions on the message can be reported through reportMessageReactions
+    :type can_report_reactions: :class:`bool`
+    
     :param has_timestamped_media: True, if media timestamp entities refers to a media in this message as opposed to a media in the replied message
     :type has_timestamped_media: :class:`bool`
     
     :param is_channel_post: True, if the message is a channel post. All messages to channels are channel posts, all other messages are not channel posts
     :type is_channel_post: :class:`bool`
+    
+    :param is_topic_message: True, if the message is a forum topic message
+    :type is_topic_message: :class:`bool`
     
     :param contains_unread_mention: True, if the message contains an unread mention for the current user
     :type contains_unread_mention: :class:`bool`
@@ -152,8 +158,10 @@ class Message(BaseObject):
     can_get_message_thread: bool
     can_get_viewers: bool
     can_get_media_timestamp_links: bool
+    can_report_reactions: bool
     has_timestamped_media: bool
     is_channel_post: bool
+    is_topic_message: bool
     contains_unread_mention: bool
     date: int
     edit_date: int

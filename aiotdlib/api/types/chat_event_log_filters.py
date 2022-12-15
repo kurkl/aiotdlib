@@ -50,6 +50,9 @@ class ChatEventLogFilters(BaseObject):
     :param video_chat_changes: True, if video chat actions need to be returned
     :type video_chat_changes: :class:`bool`
     
+    :param forum_changes: True, if forum-related actions need to be returned
+    :type forum_changes: :class:`bool`
+    
     """
 
     ID: str = Field("chatEventLogFilters", alias="@type")
@@ -65,6 +68,7 @@ class ChatEventLogFilters(BaseObject):
     setting_changes: bool
     invite_link_changes: bool
     video_chat_changes: bool
+    forum_changes: bool
 
     @staticmethod
     def read(q: dict) -> ChatEventLogFilters:

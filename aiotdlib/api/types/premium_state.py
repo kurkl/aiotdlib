@@ -9,6 +9,7 @@ from pydantic import Field
 
 from .formatted_text import FormattedText
 from .premium_feature_promotion_animation import PremiumFeaturePromotionAnimation
+from .premium_payment_option import PremiumPaymentOption
 from ..base_object import BaseObject
 
 
@@ -19,11 +20,8 @@ class PremiumState(BaseObject):
     :param state: Text description of the state of the current Premium subscription; may be empty if the current user has no Telegram Premium subscription
     :type state: :class:`FormattedText`
     
-    :param currency: ISO 4217 currency code for Telegram Premium subscription payment
-    :type currency: :class:`str`
-    
-    :param monthly_amount: Monthly subscription payment for Telegram Premium subscription, in the smallest units of the currency
-    :type monthly_amount: :class:`int`
+    :param payment_options: The list of available options for buying Telegram Premium
+    :type payment_options: :class:`list[PremiumPaymentOption]`
     
     :param animations: The list of available promotion animations for Premium features
     :type animations: :class:`list[PremiumFeaturePromotionAnimation]`
@@ -32,8 +30,7 @@ class PremiumState(BaseObject):
 
     ID: str = Field("premiumState", alias="@type")
     state: FormattedText
-    currency: str
-    monthly_amount: int
+    payment_options: list[PremiumPaymentOption]
     animations: list[PremiumFeaturePromotionAnimation]
 
     @staticmethod

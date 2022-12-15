@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from pydantic import Field
 
+from ..types import ChatAvailableReactions
 from ..base_object import BaseObject
 
 
@@ -17,14 +18,14 @@ class SetChatAvailableReactions(BaseObject):
     :param chat_id: Identifier of the chat
     :type chat_id: :class:`int`
     
-    :param available_reactions: New list of reactions, available in the chat. All reactions must be active
-    :type available_reactions: :class:`list[str]`
+    :param available_reactions: Reactions available in the chat. All emoji reactions must be active
+    :type available_reactions: :class:`ChatAvailableReactions`
     
     """
 
     ID: str = Field("setChatAvailableReactions", alias="@type")
     chat_id: int
-    available_reactions: list[str]
+    available_reactions: ChatAvailableReactions
 
     @staticmethod
     def read(q: dict) -> SetChatAvailableReactions:

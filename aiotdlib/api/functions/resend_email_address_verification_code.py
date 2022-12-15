@@ -12,7 +12,7 @@ from ..base_object import BaseObject
 
 class ResendEmailAddressVerificationCode(BaseObject):
     """
-    Re-sends the code to verify an email address to be added to a user's Telegram Passport
+    Resends the code to verify an email address to be added to a user's Telegram Passport
     
     """
 

@@ -12,7 +12,7 @@ from ..base_object import BaseObject
 
 class GetMessageAvailableReactions(BaseObject):
     """
-    Returns reactions, which can be added to a message. The list can change after updateReactions, updateChatAvailableReactions for the chat, or updateMessageInteractionInfo for the message. The method will return Premium reactions, even the current user has no Premium subscription
+    Returns reactions, which can be added to a message. The list can change after updateActiveEmojiReactions, updateChatAvailableReactions for the chat, or updateMessageInteractionInfo for the message
     
     :param chat_id: Identifier of the chat to which the message belongs
     :type chat_id: :class:`int`
@@ -20,11 +20,15 @@ class GetMessageAvailableReactions(BaseObject):
     :param message_id: Identifier of the message
     :type message_id: :class:`int`
     
+    :param row_size: Number of reaction per row, 5-25
+    :type row_size: :class:`int`
+    
     """
 
     ID: str = Field("getMessageAvailableReactions", alias="@type")
     chat_id: int
     message_id: int
+    row_size: int
 
     @staticmethod
     def read(q: dict) -> GetMessageAvailableReactions:

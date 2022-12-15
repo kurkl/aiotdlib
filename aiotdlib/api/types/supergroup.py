@@ -5,9 +5,12 @@
 # =============================================================================== #
 from __future__ import annotations
 
+import typing
+
 from pydantic import Field
 
 from .chat_member_status import ChatMemberStatus
+from .usernames import Usernames
 from ..base_object import BaseObject
 
 
@@ -18,13 +21,13 @@ class Supergroup(BaseObject):
     :param id: Supergroup or channel identifier
     :type id: :class:`int`
     
-    :param username: Username of the supergroup or channel; empty for private supergroups or channels
-    :type username: :class:`str`
+    :param usernames: Usernames of the supergroup or channel; may be null, defaults to None
+    :type usernames: :class:`Usernames`, optional
     
     :param date: Point in time (Unix timestamp) when the current user joined, or the point in time when the supergroup or channel was created, in case the user is not a member
     :type date: :class:`int`
     
-    :param status: Status of the current user in the supergroup or channel; custom title will be always empty
+    :param status: Status of the current user in the supergroup or channel; custom title will always be empty
     :type status: :class:`ChatMemberStatus`
     
     :param member_count: Number of members in the supergroup or channel; 0 if unknown. Currently, it is guaranteed to be known only if the supergroup or channel was received through searchPublicChats, searchChatsNearby, getInactiveSupergroupChats, getSuitableDiscussionChats, getGroupsInCommon, or getUserPrivacySettingRules
@@ -54,6 +57,9 @@ class Supergroup(BaseObject):
     :param is_broadcast_group: True, if the supergroup is a broadcast group, i.e. only administrators can send messages and there is no limit on the number of members
     :type is_broadcast_group: :class:`bool`
     
+    :param is_forum: True, if the supergroup must be shown as a forum by default
+    :type is_forum: :class:`bool`
+    
     :param is_verified: True, if the supergroup or channel is verified
     :type is_verified: :class:`bool`
     
@@ -70,7 +76,7 @@ class Supergroup(BaseObject):
 
     ID: str = Field("supergroup", alias="@type")
     id: int
-    username: str
+    usernames: typing.Optional[Usernames] = None
     date: int
     status: ChatMemberStatus
     member_count: int
@@ -82,6 +88,7 @@ class Supergroup(BaseObject):
     is_slow_mode_enabled: bool
     is_channel: bool
     is_broadcast_group: bool
+    is_forum: bool
     is_verified: bool
     restriction_reason: str
     is_scam: bool

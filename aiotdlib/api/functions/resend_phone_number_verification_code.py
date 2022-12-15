@@ -12,7 +12,7 @@ from ..base_object import BaseObject
 
 class ResendPhoneNumberVerificationCode(BaseObject):
     """
-    Re-sends the code to verify a phone number to be added to a user's Telegram Passport
+    Resends the code to verify a phone number to be added to a user's Telegram Passport
     
     """
 

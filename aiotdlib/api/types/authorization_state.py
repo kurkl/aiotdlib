@@ -8,6 +8,7 @@ from __future__ import annotations
 from pydantic import Field
 
 from .authentication_code_info import AuthenticationCodeInfo
+from .email_address_authentication_code_info import EmailAddressAuthenticationCodeInfo
 from .terms_of_service import TermsOfService
 from ..base_object import BaseObject
 
@@ -90,21 +91,54 @@ class AuthorizationStateWaitCode(AuthorizationState):
         return AuthorizationStateWaitCode.construct(**q)
 
 
-class AuthorizationStateWaitEncryptionKey(AuthorizationState):
+class AuthorizationStateWaitEmailAddress(AuthorizationState):
     """
-    TDLib needs an encryption key to decrypt the local database
+    TDLib needs the user's email address to authorize. Call `setAuthenticationEmailAddress` to provide the email address, or directly call `checkAuthenticationEmailCode` with Apple ID/Google ID token if allowed
     
-    :param is_encrypted: True, if the database is currently encrypted
-    :type is_encrypted: :class:`bool`
+    :param allow_apple_id: True, if authorization through Apple ID is allowed
+    :type allow_apple_id: :class:`bool`
+    
+    :param allow_google_id: True, if authorization through Google ID is allowed
+    :type allow_google_id: :class:`bool`
     
     """
 
-    ID: str = Field("authorizationStateWaitEncryptionKey", alias="@type")
-    is_encrypted: bool
+    ID: str = Field("authorizationStateWaitEmailAddress", alias="@type")
+    allow_apple_id: bool
+    allow_google_id: bool
 
     @staticmethod
-    def read(q: dict) -> AuthorizationStateWaitEncryptionKey:
-        return AuthorizationStateWaitEncryptionKey.construct(**q)
+    def read(q: dict) -> AuthorizationStateWaitEmailAddress:
+        return AuthorizationStateWaitEmailAddress.construct(**q)
+
+
+class AuthorizationStateWaitEmailCode(AuthorizationState):
+    """
+    TDLib needs the user's authentication code sent to an email address to authorize. Call `checkAuthenticationEmailCode` to provide the code
+    
+    :param allow_apple_id: True, if authorization through Apple ID is allowed
+    :type allow_apple_id: :class:`bool`
+    
+    :param allow_google_id: True, if authorization through Google ID is allowed
+    :type allow_google_id: :class:`bool`
+    
+    :param code_info: Information about the sent authentication code
+    :type code_info: :class:`EmailAddressAuthenticationCodeInfo`
+    
+    :param next_phone_number_authorization_date: Point in time (Unix timestamp) when the user will be able to authorize with a code sent to the user's phone number; 0 if unknown
+    :type next_phone_number_authorization_date: :class:`int`
+    
+    """
+
+    ID: str = Field("authorizationStateWaitEmailCode", alias="@type")
+    allow_apple_id: bool
+    allow_google_id: bool
+    code_info: EmailAddressAuthenticationCodeInfo
+    next_phone_number_authorization_date: int
+
+    @staticmethod
+    def read(q: dict) -> AuthorizationStateWaitEmailCode:
+        return AuthorizationStateWaitEmailCode.construct(**q)
 
 
 class AuthorizationStateWaitOtherDeviceConfirmation(AuthorizationState):
@@ -126,7 +160,7 @@ class AuthorizationStateWaitOtherDeviceConfirmation(AuthorizationState):
 
 class AuthorizationStateWaitPassword(AuthorizationState):
     """
-    The user has been authorized, but needs to enter a password to start using the application
+    The user has been authorized, but needs to enter a 2-step verification password to start using the application
     
     :param password_hint: Hint for the password; may be empty
     :type password_hint: :class:`str`
@@ -181,7 +215,7 @@ class AuthorizationStateWaitRegistration(AuthorizationState):
 
 class AuthorizationStateWaitTdlibParameters(AuthorizationState):
     """
-    TDLib needs TdlibParameters for initialization
+    Initializetion parameters are needed. Call `setTdlibParameters` to provide them
     
     """
 

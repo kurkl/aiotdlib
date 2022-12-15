@@ -32,7 +32,10 @@ class PasswordState(BaseObject):
     :param recovery_email_address_code_info: Information about the recovery email address to which the confirmation email was sent; may be null, defaults to None
     :type recovery_email_address_code_info: :class:`EmailAddressAuthenticationCodeInfo`, optional
     
-    :param pending_reset_date: If not 0, point in time (Unix timestamp) after which the password can be reset immediately using resetPassword
+    :param login_email_address_pattern: Pattern of the email address set up for logging in
+    :type login_email_address_pattern: :class:`str`
+    
+    :param pending_reset_date: If not 0, point in time (Unix timestamp) after which the 2-step verification password can be reset immediately using resetPassword
     :type pending_reset_date: :class:`int`
     
     """
@@ -43,6 +46,7 @@ class PasswordState(BaseObject):
     has_recovery_email_address: bool
     has_passport_data: bool
     recovery_email_address_code_info: typing.Optional[EmailAddressAuthenticationCodeInfo] = None
+    login_email_address_pattern: str
     pending_reset_date: int
 
     @staticmethod

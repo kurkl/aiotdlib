@@ -38,6 +38,9 @@ class ChatPermissions(BaseObject):
     :param can_pin_messages: True, if the user can pin messages
     :type can_pin_messages: :class:`bool`
     
+    :param can_manage_topics: True, if the user can manage topics
+    :type can_manage_topics: :class:`bool`
+    
     """
 
     ID: str = Field("chatPermissions", alias="@type")
@@ -49,6 +52,7 @@ class ChatPermissions(BaseObject):
     can_change_info: bool
     can_invite_users: bool
     can_pin_messages: bool
+    can_manage_topics: bool
 
     @staticmethod
     def read(q: dict) -> ChatPermissions:

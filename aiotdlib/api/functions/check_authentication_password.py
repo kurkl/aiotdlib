@@ -12,9 +12,9 @@ from ..base_object import BaseObject
 
 class CheckAuthenticationPassword(BaseObject):
     """
-    Checks the authentication password for correctness. Works only when the current authorization state is authorizationStateWaitPassword
+    Checks the 2-step verification password for correctness. Works only when the current authorization state is authorizationStateWaitPassword
     
-    :param password: The password to check
+    :param password: The 2-step verification password to check
     :type password: :class:`str`
     
     """

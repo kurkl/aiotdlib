@@ -10,18 +10,14 @@ from pydantic import Field
 from ..base_object import BaseObject
 
 
-class CheckDatabaseEncryptionKey(BaseObject):
+class ClearRecentReactions(BaseObject):
     """
-    Checks the database encryption key for correctness. Works only when the current authorization state is authorizationStateWaitEncryptionKey
-    
-    :param encryption_key: Encryption key to check or set up
-    :type encryption_key: :class:`str`
+    Clears the list of recently used reactions
     
     """
 
-    ID: str = Field("checkDatabaseEncryptionKey", alias="@type")
-    encryption_key: str
+    ID: str = Field("clearRecentReactions", alias="@type")
 
     @staticmethod
-    def read(q: dict) -> CheckDatabaseEncryptionKey:
-        return CheckDatabaseEncryptionKey.construct(**q)
+    def read(q: dict) -> ClearRecentReactions:
+        return ClearRecentReactions.construct(**q)

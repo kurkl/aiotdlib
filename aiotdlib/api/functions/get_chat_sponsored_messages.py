@@ -10,18 +10,18 @@ from pydantic import Field
 from ..base_object import BaseObject
 
 
-class GetChatSponsoredMessage(BaseObject):
+class GetChatSponsoredMessages(BaseObject):
     """
-    Returns sponsored message to be shown in a chat; for channel chats only. Returns a 404 error if there is no sponsored message in the chat
+    Returns sponsored messages to be shown in a chat; for channel chats only
     
     :param chat_id: Identifier of the chat
     :type chat_id: :class:`int`
     
     """
 
-    ID: str = Field("getChatSponsoredMessage", alias="@type")
+    ID: str = Field("getChatSponsoredMessages", alias="@type")
     chat_id: int
 
     @staticmethod
-    def read(q: dict) -> GetChatSponsoredMessage:
-        return GetChatSponsoredMessage.construct(**q)
+    def read(q: dict) -> GetChatSponsoredMessages:
+        return GetChatSponsoredMessages.construct(**q)

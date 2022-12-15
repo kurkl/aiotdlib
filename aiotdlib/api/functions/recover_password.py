@@ -17,7 +17,7 @@ class RecoverPassword(BaseObject):
     :param recovery_code: Recovery code to check
     :type recovery_code: :class:`str`
     
-    :param new_password: New password of the user; may be empty to remove the password
+    :param new_password: New 2-step verification password of the user; may be empty to remove the password
     :type new_password: :class:`str`
     
     :param new_hint: New password hint; may be empty

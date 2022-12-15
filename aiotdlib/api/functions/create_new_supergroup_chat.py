@@ -29,6 +29,9 @@ class CreateNewSupergroupChat(BaseObject):
     :param location: Chat location if a location-based supergroup is being created; pass null to create an ordinary supergroup chat
     :type location: :class:`ChatLocation`
     
+    :param message_ttl: Message TTL value, in seconds; must be from 0 up to 365 * 86400 and be divisible by 86400. If 0, then messages aren't deleted automatically
+    :type message_ttl: :class:`int`
+    
     :param for_import: Pass true to create a supergroup for importing messages using importMessage
     :type for_import: :class:`bool`
     
@@ -39,6 +42,7 @@ class CreateNewSupergroupChat(BaseObject):
     is_channel: bool
     param_description: typing.Optional[str] = Field(None, max_length=255)
     location: ChatLocation
+    message_ttl: int
     for_import: bool
 
     @staticmethod

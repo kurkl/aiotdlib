@@ -262,6 +262,9 @@ class InputMessageInvoice(InputMessageContent):
     :param start_parameter: Unique invoice bot deep link parameter for the generation of this invoice. If empty, it would be possible to pay directly from forwards of the invoice message
     :type start_parameter: :class:`str`
     
+    :param extended_media_content: The content of extended media attached to the invoice. The content of the message to be sent. Must be one of the following types: inputMessagePhoto, inputMessageVideo
+    :type extended_media_content: :class:`InputMessageContent`
+    
     """
 
     ID: str = Field("inputMessageInvoice", alias="@type")
@@ -276,6 +279,7 @@ class InputMessageInvoice(InputMessageContent):
     provider_token: str
     provider_data: str
     start_parameter: str
+    extended_media_content: InputMessageContent
 
     @staticmethod
     def read(q: dict) -> InputMessageInvoice:
@@ -430,7 +434,7 @@ class InputMessageText(InputMessageContent):
     """
     A text message
     
-    :param text: Formatted text to be sent; 1-GetOption("message_text_length_max") characters. Only Bold, Italic, Underline, Strikethrough, Spoiler, Code, Pre, PreCode, TextUrl and MentionName entities are allowed to be specified manually
+    :param text: Formatted text to be sent; 1-getOption("message_text_length_max") characters. Only Bold, Italic, Underline, Strikethrough, Spoiler, CustomEmoji, Code, Pre, PreCode, TextUrl and MentionName entities are allowed to be specified manually
     :type text: :class:`FormattedText`
     
     :param disable_web_page_preview: True, if rich web page previews for URLs in the message text must be disabled
@@ -493,7 +497,7 @@ class InputMessageVideo(InputMessageContent):
     :param supports_streaming: True, if the video is supposed to be streamed
     :type supports_streaming: :class:`bool`
     
-    :param caption: Video caption; pass null to use an empty caption; 0-GetOption("message_caption_length_max") characters
+    :param caption: Video caption; pass null to use an empty caption; 0-getOption("message_caption_length_max") characters
     :type caption: :class:`FormattedText`
     
     :param ttl: Video TTL (Time To Live), in seconds (0-60). A non-zero TTL can be specified only in private chats
@@ -556,10 +560,10 @@ class InputMessageVoiceNote(InputMessageContent):
     :param duration: Duration of the voice note, in seconds
     :type duration: :class:`int`
     
-    :param waveform: Waveform representation of the voice note, in 5-bit format
+    :param waveform: Waveform representation of the voice note in 5-bit format
     :type waveform: :class:`str`
     
-    :param caption: Voice note caption; pass null to use an empty caption; 0-GetOption("message_caption_length_max") characters
+    :param caption: Voice note caption; pass null to use an empty caption; 0-getOption("message_caption_length_max") characters
     :type caption: :class:`FormattedText`
     
     """

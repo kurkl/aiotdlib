@@ -1,6 +1,6 @@
 import argparse
 
-from .generator import (
+from aiotdlib_generator.generator import (
     Generator,
     LIBRARY_ROOT_PATH,
 )

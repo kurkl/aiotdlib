@@ -12,6 +12,7 @@ from pydantic import Field
 from .formatted_text import FormattedText
 from .invoice import Invoice
 from .order_info import OrderInfo
+from .payment_option import PaymentOption
 from .payment_provider import PaymentProvider
 from .photo import Photo
 from .saved_credentials import SavedCredentials
@@ -37,16 +38,19 @@ class PaymentForm(BaseObject):
     :param payment_provider: Information about the payment provider
     :type payment_provider: :class:`PaymentProvider`
     
+    :param additional_payment_options: The list of additional payment options
+    :type additional_payment_options: :class:`list[PaymentOption]`
+    
     :param saved_order_info: Saved server-side order information; may be null, defaults to None
     :type saved_order_info: :class:`OrderInfo`, optional
     
-    :param saved_credentials: Information about saved card credentials; may be null, defaults to None
-    :type saved_credentials: :class:`SavedCredentials`, optional
+    :param saved_credentials: The list of saved payment credentials
+    :type saved_credentials: :class:`list[SavedCredentials]`
     
     :param can_save_credentials: True, if the user can choose to save credentials
     :type can_save_credentials: :class:`bool`
     
-    :param need_password: True, if the user will be able to save credentials protected by a password they set up
+    :param need_password: True, if the user will be able to save credentials, if sets up a 2-step verification password
     :type need_password: :class:`bool`
     
     :param product_title: Product title
@@ -66,8 +70,9 @@ class PaymentForm(BaseObject):
     seller_bot_user_id: int
     payment_provider_user_id: int
     payment_provider: PaymentProvider
+    additional_payment_options: list[PaymentOption]
     saved_order_info: typing.Optional[OrderInfo] = None
-    saved_credentials: typing.Optional[SavedCredentials] = None
+    saved_credentials: list[SavedCredentials]
     can_save_credentials: bool
     need_password: bool
     product_title: str

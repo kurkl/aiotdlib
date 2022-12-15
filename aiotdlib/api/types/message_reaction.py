@@ -8,6 +8,7 @@ from __future__ import annotations
 from pydantic import Field
 
 from .message_sender import MessageSender
+from .reaction_type import ReactionType
 from ..base_object import BaseObject
 
 
@@ -15,8 +16,8 @@ class MessageReaction(BaseObject):
     """
     Contains information about a reaction to a message
     
-    :param reaction: Text representation of the reaction
-    :type reaction: :class:`str`
+    :param type_: Type of the reaction
+    :type type_: :class:`ReactionType`
     
     :param total_count: Number of times the reaction was added
     :type total_count: :class:`int`
@@ -30,7 +31,7 @@ class MessageReaction(BaseObject):
     """
 
     ID: str = Field("messageReaction", alias="@type")
-    reaction: str
+    type_: ReactionType = Field(..., alias='type')
     total_count: int
     is_chosen: bool
     recent_sender_ids: list[MessageSender]

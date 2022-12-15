@@ -32,17 +32,17 @@ class CheckChatUsernameResultOk(CheckChatUsernameResult):
         return CheckChatUsernameResultOk.construct(**q)
 
 
-class CheckChatUsernameResultPublicChatsTooMuch(CheckChatUsernameResult):
+class CheckChatUsernameResultPublicChatsTooMany(CheckChatUsernameResult):
     """
     The user has too many chats with username, one of them must be made private first
     
     """
 
-    ID: str = Field("checkChatUsernameResultPublicChatsTooMuch", alias="@type")
+    ID: str = Field("checkChatUsernameResultPublicChatsTooMany", alias="@type")
 
     @staticmethod
-    def read(q: dict) -> CheckChatUsernameResultPublicChatsTooMuch:
-        return CheckChatUsernameResultPublicChatsTooMuch.construct(**q)
+    def read(q: dict) -> CheckChatUsernameResultPublicChatsTooMany:
+        return CheckChatUsernameResultPublicChatsTooMany.construct(**q)
 
 
 class CheckChatUsernameResultPublicGroupsUnavailable(CheckChatUsernameResult):
@@ -82,3 +82,17 @@ class CheckChatUsernameResultUsernameOccupied(CheckChatUsernameResult):
     @staticmethod
     def read(q: dict) -> CheckChatUsernameResultUsernameOccupied:
         return CheckChatUsernameResultUsernameOccupied.construct(**q)
+
+
+class CheckChatUsernameResultUsernamePurchasable(CheckChatUsernameResult):
+    """
+    The username can be purchased at fragment.com
+    
+    """
+
+    ID: str = Field("checkChatUsernameResultUsernamePurchasable", alias="@type")
+
+    @staticmethod
+    def read(q: dict) -> CheckChatUsernameResultUsernamePurchasable:
+        return CheckChatUsernameResultUsernamePurchasable.construct(**q)
+

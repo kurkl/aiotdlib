@@ -12,11 +12,15 @@ from ..base_object import BaseObject
 
 class GetPremiumStickers(BaseObject):
     """
-    Returns examples of premium stickers for demonstration purposes
+    Returns premium stickers from regular sticker sets
+    
+    :param limit: The maximum number of stickers to be returned; 0-100
+    :type limit: :class:`int`
     
     """
 
     ID: str = Field("getPremiumStickers", alias="@type")
+    limit: int
 
     @staticmethod
     def read(q: dict) -> GetPremiumStickers:

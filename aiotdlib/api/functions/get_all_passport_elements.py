@@ -14,7 +14,7 @@ class GetAllPassportElements(BaseObject):
     """
     Returns all available Telegram Passport elements
     
-    :param password: Password of the current user
+    :param password: The 2-step verification password of the current user
     :type password: :class:`str`
     
     """

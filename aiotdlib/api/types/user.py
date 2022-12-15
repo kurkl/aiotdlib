@@ -9,9 +9,11 @@ import typing
 
 from pydantic import Field
 
+from .emoji_status import EmojiStatus
 from .profile_photo import ProfilePhoto
 from .user_status import UserStatus
 from .user_type import UserType
+from .usernames import Usernames
 from ..base_object import BaseObject
 
 
@@ -28,8 +30,8 @@ class User(BaseObject):
     :param last_name: Last name of the user
     :type last_name: :class:`str`
     
-    :param username: Username of the user
-    :type username: :class:`str`
+    :param usernames: Usernames of the user; may be null, defaults to None
+    :type usernames: :class:`Usernames`, optional
     
     :param phone_number: Phone number of the user
     :type phone_number: :class:`str`
@@ -39,6 +41,9 @@ class User(BaseObject):
     
     :param profile_photo: Profile photo of the user; may be null, defaults to None
     :type profile_photo: :class:`ProfilePhoto`, optional
+    
+    :param emoji_status: Emoji status to be shown instead of the default Telegram Premium badge; may be null. For Telegram Premium users only, defaults to None
+    :type emoji_status: :class:`EmojiStatus`, optional
     
     :param is_contact: The user is a contact of the current user
     :type is_contact: :class:`bool`
@@ -55,6 +60,9 @@ class User(BaseObject):
     :param is_support: True, if the user is Telegram support account
     :type is_support: :class:`bool`
     
+    :param has_anonymous_phone_number: True, if the user's phone number was bought on Fragment and isn't tied to a SIM card
+    :type has_anonymous_phone_number: :class:`bool`
+    
     :param restriction_reason: If non-empty, it contains a human-readable description of the reason why access to this user must be restricted
     :type restriction_reason: :class:`str`
     
@@ -64,7 +72,7 @@ class User(BaseObject):
     :param is_fake: True, if many users reported this user as a fake account
     :type is_fake: :class:`bool`
     
-    :param have_access: If false, the user is inaccessible, and the only information known about the user is inside this class. Identifier of the user can't be passed to any method except GetUser
+    :param have_access: If false, the user is inaccessible, and the only information known about the user is inside this class. Identifier of the user can't be passed to any method
     :type have_access: :class:`bool`
     
     :param type_: Type of the user
@@ -82,15 +90,17 @@ class User(BaseObject):
     id: int
     first_name: str
     last_name: str
-    username: str
+    usernames: typing.Optional[Usernames] = None
     phone_number: str
     status: UserStatus
     profile_photo: typing.Optional[ProfilePhoto] = None
+    emoji_status: typing.Optional[EmojiStatus] = None
     is_contact: bool
     is_mutual_contact: bool
     is_verified: bool
     is_premium: bool
     is_support: bool
+    has_anonymous_phone_number: bool
     restriction_reason: str
     is_scam: bool
     is_fake: bool

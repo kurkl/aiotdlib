@@ -7,12 +7,13 @@ from __future__ import annotations
 
 from pydantic import Field
 
+from ..types import ReactionType
 from ..base_object import BaseObject
 
 
-class SetMessageReaction(BaseObject):
+class RemoveMessageReaction(BaseObject):
     """
-    Changes chosen reaction for a message
+    Removes a reaction from a message. A chosen reaction can always be removed
     
     :param chat_id: Identifier of the chat to which the message belongs
     :type chat_id: :class:`int`
@@ -20,20 +21,16 @@ class SetMessageReaction(BaseObject):
     :param message_id: Identifier of the message
     :type message_id: :class:`int`
     
-    :param reaction: Text representation of the new chosen reaction. Can be an empty string or the currently chosen non-big reaction to remove the reaction
-    :type reaction: :class:`str`
-    
-    :param is_big: Pass true if the reaction is added with a big animation
-    :type is_big: :class:`bool`
+    :param reaction_type: Type of the reaction to remove
+    :type reaction_type: :class:`ReactionType`
     
     """
 
-    ID: str = Field("setMessageReaction", alias="@type")
+    ID: str = Field("removeMessageReaction", alias="@type")
     chat_id: int
     message_id: int
-    reaction: str
-    is_big: bool
+    reaction_type: ReactionType
 
     @staticmethod
-    def read(q: dict) -> SetMessageReaction:
-        return SetMessageReaction.construct(**q)
+    def read(q: dict) -> RemoveMessageReaction:
+        return RemoveMessageReaction.construct(**q)

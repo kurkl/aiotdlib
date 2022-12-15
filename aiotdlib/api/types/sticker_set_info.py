@@ -11,6 +11,7 @@ from pydantic import Field
 
 from .closed_vector_path import ClosedVectorPath
 from .sticker import Sticker
+from .sticker_format import StickerFormat
 from .sticker_type import StickerType
 from .thumbnail import Thumbnail
 from ..base_object import BaseObject
@@ -44,6 +45,9 @@ class StickerSetInfo(BaseObject):
     :param is_official: True, if the sticker set is official
     :type is_official: :class:`bool`
     
+    :param sticker_format: Format of the stickers in the set
+    :type sticker_format: :class:`StickerFormat`
+    
     :param sticker_type: Type of the stickers in the set
     :type sticker_type: :class:`StickerType`
     
@@ -67,6 +71,7 @@ class StickerSetInfo(BaseObject):
     is_installed: bool
     is_archived: bool
     is_official: bool
+    sticker_format: StickerFormat
     sticker_type: StickerType
     is_viewed: bool
     size: int

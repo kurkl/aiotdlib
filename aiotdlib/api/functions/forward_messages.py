@@ -18,6 +18,9 @@ class ForwardMessages(BaseObject):
     :param chat_id: Identifier of the chat to which to forward messages
     :type chat_id: :class:`int`
     
+    :param message_thread_id: If not 0, a message thread identifier in which the message will be sent; for forum threads only
+    :type message_thread_id: :class:`int`
+    
     :param from_chat_id: Identifier of the chat from which to forward messages
     :type from_chat_id: :class:`int`
     
@@ -40,6 +43,7 @@ class ForwardMessages(BaseObject):
 
     ID: str = Field("forwardMessages", alias="@type")
     chat_id: int
+    message_thread_id: int
     from_chat_id: int
     message_ids: list[int]
     options: MessageSendOptions

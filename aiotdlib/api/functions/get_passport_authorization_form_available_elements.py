@@ -17,7 +17,7 @@ class GetPassportAuthorizationFormAvailableElements(BaseObject):
     :param autorization_form_id: Authorization form identifier
     :type autorization_form_id: :class:`int`
     
-    :param password: Password of the current user
+    :param password: The 2-step verification password of the current user
     :type password: :class:`str`
     
     """

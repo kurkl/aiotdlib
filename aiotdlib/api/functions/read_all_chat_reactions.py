@@ -12,7 +12,7 @@ from ..base_object import BaseObject
 
 class ReadAllChatReactions(BaseObject):
     """
-    Marks all reactions in a chat as read
+    Marks all reactions in a chat or a forum topic as read
     
     :param chat_id: Chat identifier
     :type chat_id: :class:`int`

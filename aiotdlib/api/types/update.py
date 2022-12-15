@@ -20,6 +20,7 @@ from .callback_query_payload import CallbackQueryPayload
 from .chat import Chat
 from .chat_action import ChatAction
 from .chat_action_bar import ChatActionBar
+from .chat_available_reactions import ChatAvailableReactions
 from .chat_filter_info import ChatFilterInfo
 from .chat_invite_link import ChatInviteLink
 from .chat_join_request import ChatJoinRequest
@@ -38,6 +39,7 @@ from .downloaded_file_counts import DownloadedFileCounts
 from .draft_message import DraftMessage
 from .file import File
 from .file_download import FileDownload
+from .forum_topic_info import ForumTopicInfo
 from .group_call import GroupCall
 from .group_call_participant import GroupCallParticipant
 from .language_pack_string import LanguagePackString
@@ -53,12 +55,13 @@ from .notification_settings_scope import NotificationSettingsScope
 from .option_value import OptionValue
 from .order_info import OrderInfo
 from .poll import Poll
-from .reaction import Reaction
+from .reaction_type import ReactionType
 from .reply_markup import ReplyMarkup
 from .scope_notification_settings import ScopeNotificationSettings
 from .secret_chat import SecretChat
 from .sticker import Sticker
 from .sticker_set import StickerSet
+from .sticker_type import StickerType
 from .suggested_action import SuggestedAction
 from .supergroup import Supergroup
 from .supergroup_full_info import SupergroupFullInfo
@@ -81,6 +84,23 @@ class Update(BaseObject):
     """
 
     ID: str = Field("update", alias="@type")
+
+    
+class UpdateActiveEmojiReactions(Update):
+    """
+    The list of active emoji reactions has changed
+    
+    :param emojis: The new list of active emoji reactions
+    :type emojis: :class:`list[str]`
+    
+    """
+
+    ID: str = Field("updateActiveEmojiReactions", alias="@type")
+    emojis: list[str]
+
+    @staticmethod
+    def read(q: dict) -> UpdateActiveEmojiReactions:
+        return UpdateActiveEmojiReactions.construct(**q)
 
 
 class UpdateActiveNotifications(Update):
@@ -127,7 +147,7 @@ class UpdateAnimatedEmojiMessageClicked(Update):
 
 class UpdateAnimationSearchParameters(Update):
     """
-    The parameters of animation search through GetOption("animation_search_bot_username") bot has changed
+    The parameters of animation search through getOption("animation_search_bot_username") bot has changed
     
     :param provider: Name of the animation search provider
     :type provider: :class:`str`
@@ -292,14 +312,14 @@ class UpdateChatAvailableReactions(Update):
     :param chat_id: Chat identifier
     :type chat_id: :class:`int`
     
-    :param available_reactions: The new list of reactions, available in the chat
-    :type available_reactions: :class:`list[str]`
+    :param available_reactions: The new reactions, available in the chat
+    :type available_reactions: :class:`ChatAvailableReactions`
     
     """
 
     ID: str = Field("updateChatAvailableReactions", alias="@type")
     chat_id: int
-    available_reactions: list[str]
+    available_reactions: ChatAvailableReactions
 
     @staticmethod
     def read(q: dict) -> UpdateChatAvailableReactions:
@@ -893,6 +913,23 @@ class UpdateConnectionState(Update):
         return UpdateConnectionState.construct(**q)
 
 
+class UpdateDefaultReactionType(Update):
+    """
+    The type of default reaction has changed
+    
+    :param reaction_type: The new type of the default reaction
+    :type reaction_type: :class:`ReactionType`
+    
+    """
+
+    ID: str = Field("updateDefaultReactionType", alias="@type")
+    reaction_type: ReactionType
+
+    @staticmethod
+    def read(q: dict) -> UpdateDefaultReactionType:
+        return UpdateDefaultReactionType.construct(**q)
+
+
 class UpdateDeleteMessages(Update):
     """
     Some messages were deleted
@@ -1115,6 +1152,27 @@ class UpdateFileRemovedFromDownloads(Update):
         return UpdateFileRemovedFromDownloads.construct(**q)
 
 
+class UpdateForumTopicInfo(Update):
+    """
+    Basic information about a topic in a forum chat was changed
+    
+    :param chat_id: Chat identifier
+    :type chat_id: :class:`int`
+    
+    :param info: New information about the topic
+    :type info: :class:`ForumTopicInfo`
+    
+    """
+
+    ID: str = Field("updateForumTopicInfo", alias="@type")
+    chat_id: int
+    info: ForumTopicInfo
+
+    @staticmethod
+    def read(q: dict) -> UpdateForumTopicInfo:
+        return UpdateForumTopicInfo.construct(**q)
+
+
 class UpdateGroupCall(Update):
     """
     Information about a group call was updated
@@ -1178,8 +1236,8 @@ class UpdateInstalledStickerSets(Update):
     """
     The list of installed sticker sets was updated
     
-    :param is_masks: True, if the list of installed mask sticker sets was updated
-    :type is_masks: :class:`bool`
+    :param sticker_type: Type of the affected stickers
+    :type sticker_type: :class:`StickerType`
     
     :param sticker_set_ids: The new list of installed ordinary sticker sets
     :type sticker_set_ids: :class:`list[int]`
@@ -1187,7 +1245,7 @@ class UpdateInstalledStickerSets(Update):
     """
 
     ID: str = Field("updateInstalledStickerSets", alias="@type")
-    is_masks: bool
+    sticker_type: StickerType
     sticker_set_ids: list[int]
 
     @staticmethod
@@ -1952,23 +2010,6 @@ class UpdatePollAnswer(Update):
         return UpdatePollAnswer.construct(**q)
 
 
-class UpdateReactions(Update):
-    """
-    The list of supported reactions has changed
-    
-    :param reactions: The new list of supported reactions
-    :type reactions: :class:`list[Reaction]`
-    
-    """
-
-    ID: str = Field("updateReactions", alias="@type")
-    reactions: list[Reaction]
-
-    @staticmethod
-    def read(q: dict) -> UpdateReactions:
-        return UpdateReactions.construct(**q)
-
-
 class UpdateRecentStickers(Update):
     """
     The list of recently used stickers was updated
@@ -2205,12 +2246,16 @@ class UpdateTrendingStickerSets(Update):
     """
     The list of trending sticker sets was updated or some of them were viewed
     
+    :param sticker_type: Type of the affected stickers
+    :type sticker_type: :class:`StickerType`
+    
     :param sticker_sets: The prefix of the list of trending sticker sets with the newest trending sticker sets
     :type sticker_sets: :class:`TrendingStickerSets`
     
     """
 
     ID: str = Field("updateTrendingStickerSets", alias="@type")
+    sticker_type: StickerType
     sticker_sets: TrendingStickerSets
 
     @staticmethod
@@ -2392,3 +2437,4 @@ class UpdateWebAppMessageSent(Update):
     @staticmethod
     def read(q: dict) -> UpdateWebAppMessageSent:
         return UpdateWebAppMessageSent.construct(**q)
+

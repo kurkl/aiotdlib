@@ -15,6 +15,7 @@ from .add_favorite_sticker import AddFavoriteSticker
 from .add_file_to_downloads import AddFileToDownloads
 from .add_local_message import AddLocalMessage
 from .add_log_message import AddLogMessage
+from .add_message_reaction import AddMessageReaction
 from .add_network_statistics import AddNetworkStatistics
 from .add_proxy import AddProxy
 from .add_recent_sticker import AddRecentSticker
@@ -36,20 +37,21 @@ from .can_purchase_premium import CanPurchasePremium
 from .can_transfer_ownership import CanTransferOwnership
 from .cancel_download_file import CancelDownloadFile
 from .cancel_password_reset import CancelPasswordReset
-from .cancel_upload_file import CancelUploadFile
+from .cancel_preliminary_upload_file import CancelPreliminaryUploadFile
 from .change_imported_contacts import ChangeImportedContacts
 from .change_phone_number import ChangePhoneNumber
 from .change_sticker_set import ChangeStickerSet
 from .check_authentication_bot_token import CheckAuthenticationBotToken
 from .check_authentication_code import CheckAuthenticationCode
+from .check_authentication_email_code import CheckAuthenticationEmailCode
 from .check_authentication_password import CheckAuthenticationPassword
 from .check_authentication_password_recovery_code import CheckAuthenticationPasswordRecoveryCode
 from .check_change_phone_number_code import CheckChangePhoneNumberCode
 from .check_chat_invite_link import CheckChatInviteLink
 from .check_chat_username import CheckChatUsername
 from .check_created_public_chats_limit import CheckCreatedPublicChatsLimit
-from .check_database_encryption_key import CheckDatabaseEncryptionKey
 from .check_email_address_verification_code import CheckEmailAddressVerificationCode
+from .check_login_email_address_code import CheckLoginEmailAddressCode
 from .check_password_recovery_code import CheckPasswordRecoveryCode
 from .check_phone_number_confirmation_code import CheckPhoneNumberConfirmationCode
 from .check_phone_number_verification_code import CheckPhoneNumberVerificationCode
@@ -58,6 +60,8 @@ from .check_sticker_set_name import CheckStickerSetName
 from .clean_file_name import CleanFileName
 from .clear_all_draft_messages import ClearAllDraftMessages
 from .clear_imported_contacts import ClearImportedContacts
+from .clear_recent_emoji_statuses import ClearRecentEmojiStatuses
+from .clear_recent_reactions import ClearRecentReactions
 from .clear_recent_stickers import ClearRecentStickers
 from .clear_recently_found_chats import ClearRecentlyFoundChats
 from .click_animated_emoji_message import ClickAnimatedEmojiMessage
@@ -71,6 +75,7 @@ from .create_basic_group_chat import CreateBasicGroupChat
 from .create_call import CreateCall
 from .create_chat_filter import CreateChatFilter
 from .create_chat_invite_link import CreateChatInviteLink
+from .create_forum_topic import CreateForumTopic
 from .create_invoice_link import CreateInvoiceLink
 from .create_new_basic_group_chat import CreateNewBasicGroupChat
 from .create_new_secret_chat import CreateNewSecretChat
@@ -92,6 +97,7 @@ from .delete_chat_messages_by_sender import DeleteChatMessagesBySender
 from .delete_chat_reply_markup import DeleteChatReplyMarkup
 from .delete_commands import DeleteCommands
 from .delete_file import DeleteFile
+from .delete_forum_topic import DeleteForumTopic
 from .delete_language_pack import DeleteLanguagePack
 from .delete_messages import DeleteMessages
 from .delete_passport_element import DeletePassportElement
@@ -100,6 +106,7 @@ from .delete_revoked_chat_invite_link import DeleteRevokedChatInviteLink
 from .delete_saved_credentials import DeleteSavedCredentials
 from .delete_saved_order_info import DeleteSavedOrderInfo
 from .destroy import Destroy
+from .disable_all_supergroup_usernames import DisableAllSupergroupUsernames
 from .disable_proxy import DisableProxy
 from .discard_call import DiscardCall
 from .disconnect_all_websites import DisconnectAllWebsites
@@ -108,6 +115,7 @@ from .download_file import DownloadFile
 from .edit_chat_filter import EditChatFilter
 from .edit_chat_invite_link import EditChatInviteLink
 from .edit_custom_language_pack_info import EditCustomLanguagePackInfo
+from .edit_forum_topic import EditForumTopic
 from .edit_inline_message_caption import EditInlineMessageCaption
 from .edit_inline_message_live_location import EditInlineMessageLiveLocation
 from .edit_inline_message_media import EditInlineMessageMedia
@@ -129,7 +137,6 @@ from .forward_messages import ForwardMessages
 from .get_account_ttl import GetAccountTtl
 from .get_active_live_location_messages import GetActiveLiveLocationMessages
 from .get_active_sessions import GetActiveSessions
-from .get_all_animated_emojis import GetAllAnimatedEmojis
 from .get_all_passport_elements import GetAllPassportElements
 from .get_animated_emoji import GetAnimatedEmoji
 from .get_application_config import GetApplicationConfig
@@ -164,11 +171,12 @@ from .get_chat_member import GetChatMember
 from .get_chat_message_by_date import GetChatMessageByDate
 from .get_chat_message_calendar import GetChatMessageCalendar
 from .get_chat_message_count import GetChatMessageCount
+from .get_chat_message_position import GetChatMessagePosition
 from .get_chat_notification_settings_exceptions import GetChatNotificationSettingsExceptions
 from .get_chat_pinned_message import GetChatPinnedMessage
 from .get_chat_scheduled_messages import GetChatScheduledMessages
 from .get_chat_sparse_message_positions import GetChatSparseMessagePositions
-from .get_chat_sponsored_message import GetChatSponsoredMessage
+from .get_chat_sponsored_messages import GetChatSponsoredMessages
 from .get_chat_statistics import GetChatStatistics
 from .get_chats import GetChats
 from .get_commands import GetCommands
@@ -178,8 +186,13 @@ from .get_countries import GetCountries
 from .get_country_code import GetCountryCode
 from .get_created_public_chats import GetCreatedPublicChats
 from .get_current_state import GetCurrentState
+from .get_custom_emoji_reaction_animations import GetCustomEmojiReactionAnimations
+from .get_custom_emoji_stickers import GetCustomEmojiStickers
 from .get_database_statistics import GetDatabaseStatistics
 from .get_deep_link_info import GetDeepLinkInfo
+from .get_default_emoji_statuses import GetDefaultEmojiStatuses
+from .get_default_message_ttl import GetDefaultMessageTtl
+from .get_emoji_reaction import GetEmojiReaction
 from .get_emoji_suggestions_url import GetEmojiSuggestionsUrl
 from .get_external_link import GetExternalLink
 from .get_external_link_info import GetExternalLinkInfo
@@ -188,6 +201,10 @@ from .get_file import GetFile
 from .get_file_downloaded_prefix_size import GetFileDownloadedPrefixSize
 from .get_file_extension import GetFileExtension
 from .get_file_mime_type import GetFileMimeType
+from .get_forum_topic import GetForumTopic
+from .get_forum_topic_default_icons import GetForumTopicDefaultIcons
+from .get_forum_topic_link import GetForumTopicLink
+from .get_forum_topics import GetForumTopics
 from .get_game_high_scores import GetGameHighScores
 from .get_group_call import GetGroupCall
 from .get_group_call_invite_link import GetGroupCallInviteLink
@@ -246,10 +263,12 @@ from .get_preferred_country_language import GetPreferredCountryLanguage
 from .get_premium_features import GetPremiumFeatures
 from .get_premium_limit import GetPremiumLimit
 from .get_premium_state import GetPremiumState
+from .get_premium_sticker_examples import GetPremiumStickerExamples
 from .get_premium_stickers import GetPremiumStickers
 from .get_proxies import GetProxies
 from .get_proxy_link import GetProxyLink
 from .get_push_receiver_id import GetPushReceiverId
+from .get_recent_emoji_statuses import GetRecentEmojiStatuses
 from .get_recent_inline_bots import GetRecentInlineBots
 from .get_recent_stickers import GetRecentStickers
 from .get_recently_opened_chats import GetRecentlyOpenedChats
@@ -280,12 +299,15 @@ from .get_support_user import GetSupportUser
 from .get_temporary_password_state import GetTemporaryPasswordState
 from .get_text_entities import GetTextEntities
 from .get_theme_parameters_json_string import GetThemeParametersJsonString
+from .get_themed_emoji_statuses import GetThemedEmojiStatuses
 from .get_top_chats import GetTopChats
 from .get_trending_sticker_sets import GetTrendingStickerSets
 from .get_user import GetUser
 from .get_user_full_info import GetUserFullInfo
+from .get_user_link import GetUserLink
 from .get_user_privacy_setting_rules import GetUserPrivacySettingRules
 from .get_user_profile_photos import GetUserProfilePhotos
+from .get_user_support_info import GetUserSupportInfo
 from .get_video_chat_available_participants import GetVideoChatAvailableParticipants
 from .get_video_chat_rtmp_url import GetVideoChatRtmpUrl
 from .get_web_app_url import GetWebAppUrl
@@ -311,12 +333,15 @@ from .parse_markdown import ParseMarkdown
 from .parse_text_entities import ParseTextEntities
 from .pin_chat_message import PinChatMessage
 from .ping_proxy import PingProxy
+from .preliminary_upload_file import PreliminaryUploadFile
 from .process_chat_join_request import ProcessChatJoinRequest
 from .process_chat_join_requests import ProcessChatJoinRequests
 from .process_push_notification import ProcessPushNotification
 from .rate_speech_recognition import RateSpeechRecognition
 from .read_all_chat_mentions import ReadAllChatMentions
 from .read_all_chat_reactions import ReadAllChatReactions
+from .read_all_message_thread_mentions import ReadAllMessageThreadMentions
+from .read_all_message_thread_reactions import ReadAllMessageThreadReactions
 from .read_file_part import ReadFilePart
 from .recognize_speech import RecognizeSpeech
 from .recover_authentication_password import RecoverAuthenticationPassword
@@ -329,6 +354,7 @@ from .remove_chat_action_bar import RemoveChatActionBar
 from .remove_contacts import RemoveContacts
 from .remove_favorite_sticker import RemoveFavoriteSticker
 from .remove_file_from_downloads import RemoveFileFromDownloads
+from .remove_message_reaction import RemoveMessageReaction
 from .remove_notification import RemoveNotification
 from .remove_notification_group import RemoveNotificationGroup
 from .remove_proxy import RemoveProxy
@@ -339,12 +365,16 @@ from .remove_saved_animation import RemoveSavedAnimation
 from .remove_saved_notification_sound import RemoveSavedNotificationSound
 from .remove_sticker_from_set import RemoveStickerFromSet
 from .remove_top_chat import RemoveTopChat
+from .reorder_active_usernames import ReorderActiveUsernames
 from .reorder_chat_filters import ReorderChatFilters
 from .reorder_installed_sticker_sets import ReorderInstalledStickerSets
+from .reorder_supergroup_active_usernames import ReorderSupergroupActiveUsernames
 from .replace_primary_chat_invite_link import ReplacePrimaryChatInviteLink
 from .replace_video_chat_rtmp_url import ReplaceVideoChatRtmpUrl
 from .report_chat import ReportChat
 from .report_chat_photo import ReportChatPhoto
+from .report_message_reactions import ReportMessageReactions
+from .report_supergroup_anti_spam_false_positive import ReportSupergroupAntiSpamFalsePositive
 from .report_supergroup_spam import ReportSupergroupSpam
 from .request_authentication_password_recovery import RequestAuthenticationPasswordRecovery
 from .request_password_recovery import RequestPasswordRecovery
@@ -352,6 +382,7 @@ from .request_qr_code_authentication import RequestQrCodeAuthentication
 from .resend_authentication_code import ResendAuthenticationCode
 from .resend_change_phone_number_code import ResendChangePhoneNumberCode
 from .resend_email_address_verification_code import ResendEmailAddressVerificationCode
+from .resend_login_email_address_code import ResendLoginEmailAddressCode
 from .resend_messages import ResendMessages
 from .resend_phone_number_confirmation_code import ResendPhoneNumberConfirmationCode
 from .resend_phone_number_verification_code import ResendPhoneNumberVerificationCode
@@ -385,6 +416,7 @@ from .search_sticker_set import SearchStickerSet
 from .search_sticker_sets import SearchStickerSets
 from .search_stickers import SearchStickers
 from .search_user_by_phone_number import SearchUserByPhoneNumber
+from .search_user_by_token import SearchUserByToken
 from .send_bot_start_message import SendBotStartMessage
 from .send_call_debug_information import SendCallDebugInformation
 from .send_call_log import SendCallLog
@@ -404,6 +436,7 @@ from .send_phone_number_verification_code import SendPhoneNumberVerificationCode
 from .send_web_app_data import SendWebAppData
 from .set_account_ttl import SetAccountTtl
 from .set_alarm import SetAlarm
+from .set_authentication_email_address import SetAuthenticationEmailAddress
 from .set_authentication_phone_number import SetAuthenticationPhoneNumber
 from .set_auto_download_settings import SetAutoDownloadSettings
 from .set_background import SetBackground
@@ -430,7 +463,11 @@ from .set_custom_language_pack_string import SetCustomLanguagePackString
 from .set_database_encryption_key import SetDatabaseEncryptionKey
 from .set_default_channel_administrator_rights import SetDefaultChannelAdministratorRights
 from .set_default_group_administrator_rights import SetDefaultGroupAdministratorRights
+from .set_default_message_ttl import SetDefaultMessageTtl
+from .set_default_reaction_type import SetDefaultReactionType
+from .set_emoji_status import SetEmojiStatus
 from .set_file_generation_progress import SetFileGenerationProgress
+from .set_forum_topic_notification_settings import SetForumTopicNotificationSettings
 from .set_game_score import SetGameScore
 from .set_group_call_participant_is_speaking import SetGroupCallParticipantIsSpeaking
 from .set_group_call_participant_volume_level import SetGroupCallParticipantVolumeLevel
@@ -441,8 +478,8 @@ from .set_location import SetLocation
 from .set_log_stream import SetLogStream
 from .set_log_tag_verbosity_level import SetLogTagVerbosityLevel
 from .set_log_verbosity_level import SetLogVerbosityLevel
+from .set_login_email_address import SetLoginEmailAddress
 from .set_menu_button import SetMenuButton
-from .set_message_reaction import SetMessageReaction
 from .set_name import SetName
 from .set_network_type import SetNetworkType
 from .set_option import SetOption
@@ -460,6 +497,7 @@ from .set_supergroup_sticker_set import SetSupergroupStickerSet
 from .set_supergroup_username import SetSupergroupUsername
 from .set_tdlib_parameters import SetTdlibParameters
 from .set_user_privacy_setting_rules import SetUserPrivacySettingRules
+from .set_user_support_info import SetUserSupportInfo
 from .set_username import SetUsername
 from .set_video_chat_default_participant import SetVideoChatDefaultParticipant
 from .share_phone_number import SharePhoneNumber
@@ -490,6 +528,8 @@ from .toggle_chat_has_protected_content import ToggleChatHasProtectedContent
 from .toggle_chat_is_marked_as_unread import ToggleChatIsMarkedAsUnread
 from .toggle_chat_is_pinned import ToggleChatIsPinned
 from .toggle_download_is_paused import ToggleDownloadIsPaused
+from .toggle_forum_topic_is_closed import ToggleForumTopicIsClosed
+from .toggle_general_forum_topic_is_hidden import ToggleGeneralForumTopicIsHidden
 from .toggle_group_call_enabled_start_notification import ToggleGroupCallEnabledStartNotification
 from .toggle_group_call_is_my_video_enabled import ToggleGroupCallIsMyVideoEnabled
 from .toggle_group_call_is_my_video_paused import ToggleGroupCallIsMyVideoPaused
@@ -500,23 +540,28 @@ from .toggle_group_call_screen_sharing_is_paused import ToggleGroupCallScreenSha
 from .toggle_message_sender_is_blocked import ToggleMessageSenderIsBlocked
 from .toggle_session_can_accept_calls import ToggleSessionCanAcceptCalls
 from .toggle_session_can_accept_secret_chats import ToggleSessionCanAcceptSecretChats
+from .toggle_supergroup_is_aggressive_anti_spam_enabled import ToggleSupergroupIsAggressiveAntiSpamEnabled
 from .toggle_supergroup_is_all_history_available import ToggleSupergroupIsAllHistoryAvailable
 from .toggle_supergroup_is_broadcast_group import ToggleSupergroupIsBroadcastGroup
+from .toggle_supergroup_is_forum import ToggleSupergroupIsForum
 from .toggle_supergroup_join_by_request import ToggleSupergroupJoinByRequest
 from .toggle_supergroup_join_to_send_messages import ToggleSupergroupJoinToSendMessages
 from .toggle_supergroup_sign_messages import ToggleSupergroupSignMessages
+from .toggle_supergroup_username_is_active import ToggleSupergroupUsernameIsActive
+from .toggle_username_is_active import ToggleUsernameIsActive
 from .transfer_chat_ownership import TransferChatOwnership
 from .translate_text import TranslateText
 from .unpin_all_chat_messages import UnpinAllChatMessages
+from .unpin_all_message_thread_messages import UnpinAllMessageThreadMessages
 from .unpin_chat_message import UnpinChatMessage
 from .upgrade_basic_group_chat_to_supergroup_chat import UpgradeBasicGroupChatToSupergroupChat
-from .upload_file import UploadFile
 from .upload_sticker_file import UploadStickerFile
 from .validate_order_info import ValidateOrderInfo
 from .view_messages import ViewMessages
 from .view_premium_feature import ViewPremiumFeature
 from .view_trending_sticker_sets import ViewTrendingStickerSets
 from .write_generated_file_part import WriteGeneratedFilePart
+
 
 __all__ = [
     "AcceptCall",
@@ -530,6 +575,7 @@ __all__ = [
     "AddFileToDownloads",
     "AddLocalMessage",
     "AddLogMessage",
+    "AddMessageReaction",
     "AddNetworkStatistics",
     "AddProxy",
     "AddRecentSticker",
@@ -551,20 +597,21 @@ __all__ = [
     "CanTransferOwnership",
     "CancelDownloadFile",
     "CancelPasswordReset",
-    "CancelUploadFile",
+    "CancelPreliminaryUploadFile",
     "ChangeImportedContacts",
     "ChangePhoneNumber",
     "ChangeStickerSet",
     "CheckAuthenticationBotToken",
     "CheckAuthenticationCode",
+    "CheckAuthenticationEmailCode",
     "CheckAuthenticationPassword",
     "CheckAuthenticationPasswordRecoveryCode",
     "CheckChangePhoneNumberCode",
     "CheckChatInviteLink",
     "CheckChatUsername",
     "CheckCreatedPublicChatsLimit",
-    "CheckDatabaseEncryptionKey",
     "CheckEmailAddressVerificationCode",
+    "CheckLoginEmailAddressCode",
     "CheckPasswordRecoveryCode",
     "CheckPhoneNumberConfirmationCode",
     "CheckPhoneNumberVerificationCode",
@@ -573,6 +620,8 @@ __all__ = [
     "CleanFileName",
     "ClearAllDraftMessages",
     "ClearImportedContacts",
+    "ClearRecentEmojiStatuses",
+    "ClearRecentReactions",
     "ClearRecentStickers",
     "ClearRecentlyFoundChats",
     "ClickAnimatedEmojiMessage",
@@ -586,6 +635,7 @@ __all__ = [
     "CreateCall",
     "CreateChatFilter",
     "CreateChatInviteLink",
+    "CreateForumTopic",
     "CreateInvoiceLink",
     "CreateNewBasicGroupChat",
     "CreateNewSecretChat",
@@ -607,6 +657,7 @@ __all__ = [
     "DeleteChatReplyMarkup",
     "DeleteCommands",
     "DeleteFile",
+    "DeleteForumTopic",
     "DeleteLanguagePack",
     "DeleteMessages",
     "DeletePassportElement",
@@ -615,6 +666,7 @@ __all__ = [
     "DeleteSavedCredentials",
     "DeleteSavedOrderInfo",
     "Destroy",
+    "DisableAllSupergroupUsernames",
     "DisableProxy",
     "DiscardCall",
     "DisconnectAllWebsites",
@@ -623,6 +675,7 @@ __all__ = [
     "EditChatFilter",
     "EditChatInviteLink",
     "EditCustomLanguagePackInfo",
+    "EditForumTopic",
     "EditInlineMessageCaption",
     "EditInlineMessageLiveLocation",
     "EditInlineMessageMedia",
@@ -644,7 +697,6 @@ __all__ = [
     "GetAccountTtl",
     "GetActiveLiveLocationMessages",
     "GetActiveSessions",
-    "GetAllAnimatedEmojis",
     "GetAllPassportElements",
     "GetAnimatedEmoji",
     "GetApplicationConfig",
@@ -679,11 +731,12 @@ __all__ = [
     "GetChatMessageByDate",
     "GetChatMessageCalendar",
     "GetChatMessageCount",
+    "GetChatMessagePosition",
     "GetChatNotificationSettingsExceptions",
     "GetChatPinnedMessage",
     "GetChatScheduledMessages",
     "GetChatSparseMessagePositions",
-    "GetChatSponsoredMessage",
+    "GetChatSponsoredMessages",
     "GetChatStatistics",
     "GetChats",
     "GetCommands",
@@ -693,8 +746,13 @@ __all__ = [
     "GetCountryCode",
     "GetCreatedPublicChats",
     "GetCurrentState",
+    "GetCustomEmojiReactionAnimations",
+    "GetCustomEmojiStickers",
     "GetDatabaseStatistics",
     "GetDeepLinkInfo",
+    "GetDefaultEmojiStatuses",
+    "GetDefaultMessageTtl",
+    "GetEmojiReaction",
     "GetEmojiSuggestionsUrl",
     "GetExternalLink",
     "GetExternalLinkInfo",
@@ -703,6 +761,10 @@ __all__ = [
     "GetFileDownloadedPrefixSize",
     "GetFileExtension",
     "GetFileMimeType",
+    "GetForumTopic",
+    "GetForumTopicDefaultIcons",
+    "GetForumTopicLink",
+    "GetForumTopics",
     "GetGameHighScores",
     "GetGroupCall",
     "GetGroupCallInviteLink",
@@ -761,10 +823,12 @@ __all__ = [
     "GetPremiumFeatures",
     "GetPremiumLimit",
     "GetPremiumState",
+    "GetPremiumStickerExamples",
     "GetPremiumStickers",
     "GetProxies",
     "GetProxyLink",
     "GetPushReceiverId",
+    "GetRecentEmojiStatuses",
     "GetRecentInlineBots",
     "GetRecentStickers",
     "GetRecentlyOpenedChats",
@@ -795,12 +859,15 @@ __all__ = [
     "GetTemporaryPasswordState",
     "GetTextEntities",
     "GetThemeParametersJsonString",
+    "GetThemedEmojiStatuses",
     "GetTopChats",
     "GetTrendingStickerSets",
     "GetUser",
     "GetUserFullInfo",
+    "GetUserLink",
     "GetUserPrivacySettingRules",
     "GetUserProfilePhotos",
+    "GetUserSupportInfo",
     "GetVideoChatAvailableParticipants",
     "GetVideoChatRtmpUrl",
     "GetWebAppUrl",
@@ -826,12 +893,15 @@ __all__ = [
     "ParseTextEntities",
     "PinChatMessage",
     "PingProxy",
+    "PreliminaryUploadFile",
     "ProcessChatJoinRequest",
     "ProcessChatJoinRequests",
     "ProcessPushNotification",
     "RateSpeechRecognition",
     "ReadAllChatMentions",
     "ReadAllChatReactions",
+    "ReadAllMessageThreadMentions",
+    "ReadAllMessageThreadReactions",
     "ReadFilePart",
     "RecognizeSpeech",
     "RecoverAuthenticationPassword",
@@ -844,6 +914,7 @@ __all__ = [
     "RemoveContacts",
     "RemoveFavoriteSticker",
     "RemoveFileFromDownloads",
+    "RemoveMessageReaction",
     "RemoveNotification",
     "RemoveNotificationGroup",
     "RemoveProxy",
@@ -854,12 +925,16 @@ __all__ = [
     "RemoveSavedNotificationSound",
     "RemoveStickerFromSet",
     "RemoveTopChat",
+    "ReorderActiveUsernames",
     "ReorderChatFilters",
     "ReorderInstalledStickerSets",
+    "ReorderSupergroupActiveUsernames",
     "ReplacePrimaryChatInviteLink",
     "ReplaceVideoChatRtmpUrl",
     "ReportChat",
     "ReportChatPhoto",
+    "ReportMessageReactions",
+    "ReportSupergroupAntiSpamFalsePositive",
     "ReportSupergroupSpam",
     "RequestAuthenticationPasswordRecovery",
     "RequestPasswordRecovery",
@@ -867,6 +942,7 @@ __all__ = [
     "ResendAuthenticationCode",
     "ResendChangePhoneNumberCode",
     "ResendEmailAddressVerificationCode",
+    "ResendLoginEmailAddressCode",
     "ResendMessages",
     "ResendPhoneNumberConfirmationCode",
     "ResendPhoneNumberVerificationCode",
@@ -900,6 +976,7 @@ __all__ = [
     "SearchStickerSets",
     "SearchStickers",
     "SearchUserByPhoneNumber",
+    "SearchUserByToken",
     "SendBotStartMessage",
     "SendCallDebugInformation",
     "SendCallLog",
@@ -919,6 +996,7 @@ __all__ = [
     "SendWebAppData",
     "SetAccountTtl",
     "SetAlarm",
+    "SetAuthenticationEmailAddress",
     "SetAuthenticationPhoneNumber",
     "SetAutoDownloadSettings",
     "SetBackground",
@@ -945,7 +1023,11 @@ __all__ = [
     "SetDatabaseEncryptionKey",
     "SetDefaultChannelAdministratorRights",
     "SetDefaultGroupAdministratorRights",
+    "SetDefaultMessageTtl",
+    "SetDefaultReactionType",
+    "SetEmojiStatus",
     "SetFileGenerationProgress",
+    "SetForumTopicNotificationSettings",
     "SetGameScore",
     "SetGroupCallParticipantIsSpeaking",
     "SetGroupCallParticipantVolumeLevel",
@@ -956,8 +1038,8 @@ __all__ = [
     "SetLogStream",
     "SetLogTagVerbosityLevel",
     "SetLogVerbosityLevel",
+    "SetLoginEmailAddress",
     "SetMenuButton",
-    "SetMessageReaction",
     "SetName",
     "SetNetworkType",
     "SetOption",
@@ -975,6 +1057,7 @@ __all__ = [
     "SetSupergroupUsername",
     "SetTdlibParameters",
     "SetUserPrivacySettingRules",
+    "SetUserSupportInfo",
     "SetUsername",
     "SetVideoChatDefaultParticipant",
     "SharePhoneNumber",
@@ -1005,6 +1088,8 @@ __all__ = [
     "ToggleChatIsMarkedAsUnread",
     "ToggleChatIsPinned",
     "ToggleDownloadIsPaused",
+    "ToggleForumTopicIsClosed",
+    "ToggleGeneralForumTopicIsHidden",
     "ToggleGroupCallEnabledStartNotification",
     "ToggleGroupCallIsMyVideoEnabled",
     "ToggleGroupCallIsMyVideoPaused",
@@ -1015,17 +1100,21 @@ __all__ = [
     "ToggleMessageSenderIsBlocked",
     "ToggleSessionCanAcceptCalls",
     "ToggleSessionCanAcceptSecretChats",
+    "ToggleSupergroupIsAggressiveAntiSpamEnabled",
     "ToggleSupergroupIsAllHistoryAvailable",
     "ToggleSupergroupIsBroadcastGroup",
+    "ToggleSupergroupIsForum",
     "ToggleSupergroupJoinByRequest",
     "ToggleSupergroupJoinToSendMessages",
     "ToggleSupergroupSignMessages",
+    "ToggleSupergroupUsernameIsActive",
+    "ToggleUsernameIsActive",
     "TransferChatOwnership",
     "TranslateText",
     "UnpinAllChatMessages",
+    "UnpinAllMessageThreadMessages",
     "UnpinChatMessage",
     "UpgradeBasicGroupChatToSupergroupChat",
-    "UploadFile",
     "UploadStickerFile",
     "ValidateOrderInfo",
     "ViewMessages",

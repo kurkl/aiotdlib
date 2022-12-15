@@ -9,11 +9,13 @@ import typing
 
 from pydantic import Field
 
+from .chat_available_reactions import ChatAvailableReactions
 from .chat_invite_link import ChatInviteLink
 from .chat_location import ChatLocation
 from .chat_member_status import ChatMemberStatus
 from .chat_permissions import ChatPermissions
 from .chat_photo import ChatPhoto
+from .forum_topic_info import ForumTopicInfo
 from .message import Message
 from .message_sender import MessageSender
 from ..base_object import BaseObject
@@ -27,22 +29,43 @@ class ChatEventAction(BaseObject):
 
     ID: str = Field("chatEventAction", alias="@type")
 
+    
+class ChatEventActiveUsernamesChanged(ChatEventAction):
+    """
+    The chat active usernames were changed
+    
+    :param old_usernames: Previous list of active usernames
+    :type old_usernames: :class:`list[str]`
+    
+    :param new_usernames: New list of active usernames
+    :type new_usernames: :class:`list[str]`
+    
+    """
+
+    ID: str = Field("chatEventActiveUsernamesChanged", alias="@type")
+    old_usernames: list[str]
+    new_usernames: list[str]
+
+    @staticmethod
+    def read(q: dict) -> ChatEventActiveUsernamesChanged:
+        return ChatEventActiveUsernamesChanged.construct(**q)
+
 
 class ChatEventAvailableReactionsChanged(ChatEventAction):
     """
     The chat available reactions were changed
     
     :param old_available_reactions: Previous chat available reactions
-    :type old_available_reactions: :class:`list[str]`
+    :type old_available_reactions: :class:`ChatAvailableReactions`
     
     :param new_available_reactions: New chat available reactions
-    :type new_available_reactions: :class:`list[str]`
+    :type new_available_reactions: :class:`ChatAvailableReactions`
     
     """
 
     ID: str = Field("chatEventAvailableReactionsChanged", alias="@type")
-    old_available_reactions: list[str]
-    new_available_reactions: list[str]
+    old_available_reactions: ChatAvailableReactions
+    new_available_reactions: ChatAvailableReactions
 
     @staticmethod
     def read(q: dict) -> ChatEventAvailableReactionsChanged:
@@ -68,6 +91,116 @@ class ChatEventDescriptionChanged(ChatEventAction):
     @staticmethod
     def read(q: dict) -> ChatEventDescriptionChanged:
         return ChatEventDescriptionChanged.construct(**q)
+
+
+class ChatEventForumTopicCreated(ChatEventAction):
+    """
+    A new forum topic was created
+    
+    :param topic_info: Information about the topic
+    :type topic_info: :class:`ForumTopicInfo`
+    
+    """
+
+    ID: str = Field("chatEventForumTopicCreated", alias="@type")
+    topic_info: ForumTopicInfo
+
+    @staticmethod
+    def read(q: dict) -> ChatEventForumTopicCreated:
+        return ChatEventForumTopicCreated.construct(**q)
+
+
+class ChatEventForumTopicDeleted(ChatEventAction):
+    """
+    A forum topic was deleted
+    
+    :param topic_info: Information about the topic
+    :type topic_info: :class:`ForumTopicInfo`
+    
+    """
+
+    ID: str = Field("chatEventForumTopicDeleted", alias="@type")
+    topic_info: ForumTopicInfo
+
+    @staticmethod
+    def read(q: dict) -> ChatEventForumTopicDeleted:
+        return ChatEventForumTopicDeleted.construct(**q)
+
+
+class ChatEventForumTopicEdited(ChatEventAction):
+    """
+    A forum topic was edited
+    
+    :param old_topic_info: Old information about the topic
+    :type old_topic_info: :class:`ForumTopicInfo`
+    
+    :param new_topic_info: New information about the topic
+    :type new_topic_info: :class:`ForumTopicInfo`
+    
+    """
+
+    ID: str = Field("chatEventForumTopicEdited", alias="@type")
+    old_topic_info: ForumTopicInfo
+    new_topic_info: ForumTopicInfo
+
+    @staticmethod
+    def read(q: dict) -> ChatEventForumTopicEdited:
+        return ChatEventForumTopicEdited.construct(**q)
+
+
+class ChatEventForumTopicPinned(ChatEventAction):
+    """
+    A pinned forum topic was changed
+    
+    :param old_topic_info: Information about the old pinned topic; may be null, defaults to None
+    :type old_topic_info: :class:`ForumTopicInfo`, optional
+    
+    :param new_topic_info: Information about the new pinned topic; may be null, defaults to None
+    :type new_topic_info: :class:`ForumTopicInfo`, optional
+    
+    """
+
+    ID: str = Field("chatEventForumTopicPinned", alias="@type")
+    old_topic_info: typing.Optional[ForumTopicInfo] = None
+    new_topic_info: typing.Optional[ForumTopicInfo] = None
+
+    @staticmethod
+    def read(q: dict) -> ChatEventForumTopicPinned:
+        return ChatEventForumTopicPinned.construct(**q)
+
+
+class ChatEventForumTopicToggleIsClosed(ChatEventAction):
+    """
+    A forum topic was closed or reopened
+    
+    :param topic_info: New information about the topic
+    :type topic_info: :class:`ForumTopicInfo`
+    
+    """
+
+    ID: str = Field("chatEventForumTopicToggleIsClosed", alias="@type")
+    topic_info: ForumTopicInfo
+
+    @staticmethod
+    def read(q: dict) -> ChatEventForumTopicToggleIsClosed:
+        return ChatEventForumTopicToggleIsClosed.construct(**q)
+
+
+class ChatEventForumTopicToggleIsHidden(ChatEventAction):
+    """
+    The General forum topic was hidden or unhidden
+    
+    :param topic_info: New information about the topic
+    :type topic_info: :class:`ForumTopicInfo`
+    
+    """
+
+    ID: str = Field("chatEventForumTopicToggleIsHidden", alias="@type")
+    topic_info: ForumTopicInfo
+
+    @staticmethod
+    def read(q: dict) -> ChatEventForumTopicToggleIsHidden:
+        return ChatEventForumTopicToggleIsHidden.construct(**q)
 
 
 class ChatEventHasProtectedContentToggled(ChatEventAction):
@@ -159,6 +292,23 @@ class ChatEventInvitesToggled(ChatEventAction):
         return ChatEventInvitesToggled.construct(**q)
 
 
+class ChatEventIsAggressiveAntiSpamEnabledToggled(ChatEventAction):
+    """
+    The is_aggressive_anti_spam_enabled setting of a supergroup was toggled
+    
+    :param is_aggressive_anti_spam_enabled: New value of is_aggressive_anti_spam_enabled
+    :type is_aggressive_anti_spam_enabled: :class:`bool`
+    
+    """
+
+    ID: str = Field("chatEventIsAggressiveAntiSpamEnabledToggled", alias="@type")
+    is_aggressive_anti_spam_enabled: bool
+
+    @staticmethod
+    def read(q: dict) -> ChatEventIsAggressiveAntiSpamEnabledToggled:
+        return ChatEventIsAggressiveAntiSpamEnabledToggled.construct(**q)
+
+
 class ChatEventIsAllHistoryAvailableToggled(ChatEventAction):
     """
     The is_all_history_available setting of a supergroup was toggled
@@ -174,6 +324,23 @@ class ChatEventIsAllHistoryAvailableToggled(ChatEventAction):
     @staticmethod
     def read(q: dict) -> ChatEventIsAllHistoryAvailableToggled:
         return ChatEventIsAllHistoryAvailableToggled.construct(**q)
+
+
+class ChatEventIsForumToggled(ChatEventAction):
+    """
+    The is_forum setting of a channel was toggled
+    
+    :param is_forum: New value of is_forum
+    :type is_forum: :class:`bool`
+    
+    """
+
+    ID: str = Field("chatEventIsForumToggled", alias="@type")
+    is_forum: bool
+
+    @staticmethod
+    def read(q: dict) -> ChatEventIsForumToggled:
+        return ChatEventIsForumToggled.construct(**q)
 
 
 class ChatEventLinkedChatChanged(ChatEventAction):
@@ -360,10 +527,14 @@ class ChatEventMessageDeleted(ChatEventAction):
     :param message: Deleted message
     :type message: :class:`Message`
     
+    :param can_report_anti_spam_false_positive: True, if the message deletion can be reported via reportSupergroupAntiSpamFalsePositive
+    :type can_report_anti_spam_false_positive: :class:`bool`
+    
     """
 
     ID: str = Field("chatEventMessageDeleted", alias="@type")
     message: Message
+    can_report_anti_spam_false_positive: bool
 
     @staticmethod
     def read(q: dict) -> ChatEventMessageDeleted:
@@ -587,7 +758,7 @@ class ChatEventTitleChanged(ChatEventAction):
 
 class ChatEventUsernameChanged(ChatEventAction):
     """
-    The chat username was changed
+    The chat editable username was changed
     
     :param old_username: Previous chat username
     :type old_username: :class:`str`

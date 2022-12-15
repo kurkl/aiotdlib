@@ -234,6 +234,27 @@ class InternalLinkTypeGame(InternalLinkType):
         return InternalLinkTypeGame.construct(**q)
 
 
+class InternalLinkTypeInstantView(InternalLinkType):
+    """
+    The link must be opened in an Instant View. Call getWebPageInstantView with the given URL to process the link
+    
+    :param url: URL to be passed to getWebPageInstantView
+    :type url: :class:`str`
+    
+    :param fallback_url: An URL to open if getWebPageInstantView fails
+    :type fallback_url: :class:`str`
+    
+    """
+
+    ID: str = Field("internalLinkTypeInstantView", alias="@type")
+    url: str
+    fallback_url: str
+
+    @staticmethod
+    def read(q: dict) -> InternalLinkTypeInstantView:
+        return InternalLinkTypeInstantView.construct(**q)
+
+
 class InternalLinkTypeInvoice(InternalLinkType):
     """
     The link is a link to an invoice. Call getPaymentForm with the given invoice name to process the link
@@ -283,7 +304,7 @@ class InternalLinkTypeLanguageSettings(InternalLinkType):
 
 class InternalLinkTypeMessage(InternalLinkType):
     """
-    The link is a link to a Telegram message. Call getMessageLinkInfo with the given URL to process the link
+    The link is a link to a Telegram message or a forum topic. Call getMessageLinkInfo with the given URL to process the link
     
     :param url: URL to be passed to getMessageLinkInfo
     :type url: :class:`str`
@@ -458,6 +479,19 @@ class InternalLinkTypeQrCodeAuthentication(InternalLinkType):
         return InternalLinkTypeQrCodeAuthentication.construct(**q)
 
 
+class InternalLinkTypeRestorePurchases(InternalLinkType):
+    """
+    The link forces restore of App Store purchases when opened. For official iOS application only
+    
+    """
+
+    ID: str = Field("internalLinkTypeRestorePurchases", alias="@type")
+
+    @staticmethod
+    def read(q: dict) -> InternalLinkTypeRestorePurchases:
+        return InternalLinkTypeRestorePurchases.construct(**q)
+
+
 class InternalLinkTypeSettings(InternalLinkType):
     """
     The link is a link to application settings
@@ -563,6 +597,23 @@ class InternalLinkTypeUserPhoneNumber(InternalLinkType):
     @staticmethod
     def read(q: dict) -> InternalLinkTypeUserPhoneNumber:
         return InternalLinkTypeUserPhoneNumber.construct(**q)
+
+
+class InternalLinkTypeUserToken(InternalLinkType):
+    """
+    The link is a link to a user by a temporary token. Call searchUserByToken with the given token to process the link
+    
+    :param token: The token
+    :type token: :class:`str`
+    
+    """
+
+    ID: str = Field("internalLinkTypeUserToken", alias="@type")
+    token: str
+
+    @staticmethod
+    def read(q: dict) -> InternalLinkTypeUserToken:
+        return InternalLinkTypeUserToken.construct(**q)
 
 
 class InternalLinkTypeVideoChat(InternalLinkType):

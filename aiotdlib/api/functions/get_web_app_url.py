@@ -24,12 +24,16 @@ class GetWebAppUrl(BaseObject):
     :param theme: Preferred Web App theme; pass null to use the default theme
     :type theme: :class:`ThemeParameters`
     
+    :param application_name: Short name of the application; 0-64 English letters, digits, and underscores
+    :type application_name: :class:`str`
+    
     """
 
     ID: str = Field("getWebAppUrl", alias="@type")
     bot_user_id: int
     url: str
     theme: ThemeParameters
+    application_name: str
 
     @staticmethod
     def read(q: dict) -> GetWebAppUrl:

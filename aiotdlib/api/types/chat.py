@@ -10,6 +10,7 @@ import typing
 from pydantic import Field
 
 from .chat_action_bar import ChatActionBar
+from .chat_available_reactions import ChatAvailableReactions
 from .chat_join_requests_info import ChatJoinRequestsInfo
 from .chat_notification_settings import ChatNotificationSettings
 from .chat_permissions import ChatPermissions
@@ -93,8 +94,8 @@ class Chat(BaseObject):
     :param notification_settings: Notification settings for the chat
     :type notification_settings: :class:`ChatNotificationSettings`
     
-    :param available_reactions: List of reactions, available in the chat
-    :type available_reactions: :class:`list[str]`
+    :param available_reactions: Types of reaction, available in the chat
+    :type available_reactions: :class:`ChatAvailableReactions`
     
     :param message_ttl: Current message Time To Live setting (self-destruct timer) for the chat; 0 if not defined. TTL is counted from the time message or its content is viewed in secret chats and from the send date in other chats
     :type message_ttl: :class:`int`
@@ -145,7 +146,7 @@ class Chat(BaseObject):
     unread_mention_count: int
     unread_reaction_count: int
     notification_settings: ChatNotificationSettings
-    available_reactions: list[str]
+    available_reactions: ChatAvailableReactions
     message_ttl: int
     theme_name: str
     action_bar: typing.Optional[ChatActionBar] = None

@@ -5,11 +5,8 @@
 # =============================================================================== #
 from __future__ import annotations
 
-import typing
-
 from pydantic import Field
 
-from .mask_position import MaskPosition
 from ..base_object import BaseObject
 
 
@@ -21,58 +18,42 @@ class StickerType(BaseObject):
 
     ID: str = Field("stickerType", alias="@type")
 
-
-class StickerTypeAnimated(StickerType):
+    
+class StickerTypeCustomEmoji(StickerType):
     """
-    The sticker is an animation in TGS format
+    The sticker is a custom emoji to be used inside message text and caption
     
     """
 
-    ID: str = Field("stickerTypeAnimated", alias="@type")
+    ID: str = Field("stickerTypeCustomEmoji", alias="@type")
 
     @staticmethod
-    def read(q: dict) -> StickerTypeAnimated:
-        return StickerTypeAnimated.construct(**q)
+    def read(q: dict) -> StickerTypeCustomEmoji:
+        return StickerTypeCustomEmoji.construct(**q)
 
 
 class StickerTypeMask(StickerType):
     """
     The sticker is a mask in WEBP format to be placed on photos or videos
     
-    :param mask_position: Position where the mask is placed; may be null, defaults to None
-    :type mask_position: :class:`MaskPosition`, optional
-    
     """
 
     ID: str = Field("stickerTypeMask", alias="@type")
-    mask_position: typing.Optional[MaskPosition] = None
 
     @staticmethod
     def read(q: dict) -> StickerTypeMask:
         return StickerTypeMask.construct(**q)
 
 
-class StickerTypeStatic(StickerType):
+class StickerTypeRegular(StickerType):
     """
-    The sticker is an image in WEBP format
+    The sticker is a regular sticker
     
     """
 
-    ID: str = Field("stickerTypeStatic", alias="@type")
+    ID: str = Field("stickerTypeRegular", alias="@type")
 
     @staticmethod
-    def read(q: dict) -> StickerTypeStatic:
-        return StickerTypeStatic.construct(**q)
+    def read(q: dict) -> StickerTypeRegular:
+        return StickerTypeRegular.construct(**q)
 
-
-class StickerTypeVideo(StickerType):
-    """
-    The sticker is a video in WEBM format
-    
-    """
-
-    ID: str = Field("stickerTypeVideo", alias="@type")
-
-    @staticmethod
-    def read(q: dict) -> StickerTypeVideo:
-        return StickerTypeVideo.construct(**q)

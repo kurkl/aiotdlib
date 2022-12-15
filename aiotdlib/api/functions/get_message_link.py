@@ -26,8 +26,8 @@ class GetMessageLink(BaseObject):
     :param for_album: Pass true to create a link for the whole media album
     :type for_album: :class:`bool`
     
-    :param for_comment: Pass true to create a link to the message as a channel post comment, or from a message thread
-    :type for_comment: :class:`bool`
+    :param in_message_thread: Pass true to create a link to the message as a channel post comment, in a message thread, or a forum topic
+    :type in_message_thread: :class:`bool`
     
     """
 
@@ -36,7 +36,7 @@ class GetMessageLink(BaseObject):
     message_id: int
     media_timestamp: int
     for_album: bool
-    for_comment: bool
+    in_message_thread: bool
 
     @staticmethod
     def read(q: dict) -> GetMessageLink:

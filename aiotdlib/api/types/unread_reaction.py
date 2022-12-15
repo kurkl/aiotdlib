@@ -8,6 +8,7 @@ from __future__ import annotations
 from pydantic import Field
 
 from .message_sender import MessageSender
+from .reaction_type import ReactionType
 from ..base_object import BaseObject
 
 
@@ -15,8 +16,8 @@ class UnreadReaction(BaseObject):
     """
     Contains information about an unread reaction to a message
     
-    :param reaction: Text representation of the reaction
-    :type reaction: :class:`str`
+    :param type_: Type of the reaction
+    :type type_: :class:`ReactionType`
     
     :param sender_id: Identifier of the sender, added the reaction
     :type sender_id: :class:`MessageSender`
@@ -27,7 +28,7 @@ class UnreadReaction(BaseObject):
     """
 
     ID: str = Field("unreadReaction", alias="@type")
-    reaction: str
+    type_: ReactionType = Field(..., alias='type')
     sender_id: MessageSender
     is_big: bool
 

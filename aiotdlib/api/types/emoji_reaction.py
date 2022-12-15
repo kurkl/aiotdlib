@@ -13,21 +13,18 @@ from .sticker import Sticker
 from ..base_object import BaseObject
 
 
-class Reaction(BaseObject):
+class EmojiReaction(BaseObject):
     """
-    Contains stickers which must be used for reaction animation rendering
+    Contains information about a emoji reaction
     
-    :param reaction: Text representation of the reaction
-    :type reaction: :class:`str`
+    :param emoji: Text representation of the reaction
+    :type emoji: :class:`str`
     
     :param title: Reaction title
     :type title: :class:`str`
     
     :param is_active: True, if the reaction can be added to new messages and enabled in chats
     :type is_active: :class:`bool`
-    
-    :param is_premium: True, if the reaction is available only for Premium users
-    :type is_premium: :class:`bool`
     
     :param static_icon: Static icon for the reaction
     :type static_icon: :class:`Sticker`
@@ -52,11 +49,10 @@ class Reaction(BaseObject):
     
     """
 
-    ID: str = Field("reaction", alias="@type")
-    reaction: str
+    ID: str = Field("emojiReaction", alias="@type")
+    emoji: str
     title: str
     is_active: bool
-    is_premium: bool
     static_icon: Sticker
     appear_animation: Sticker
     select_animation: Sticker
@@ -66,5 +62,5 @@ class Reaction(BaseObject):
     center_animation: typing.Optional[Sticker] = None
 
     @staticmethod
-    def read(q: dict) -> Reaction:
-        return Reaction.construct(**q)
+    def read(q: dict) -> EmojiReaction:
+        return EmojiReaction.construct(**q)

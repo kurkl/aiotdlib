@@ -68,7 +68,6 @@ from .api import (
     SecretChat,
     Supergroup,
     SupergroupFullInfo,
-    TdlibParameters,
     TextParseModeHTML,
     TextParseModeMarkdown,
     UpdateAuthorizationState,
@@ -788,38 +787,40 @@ class Client:
         return await self.api.get_authorization_state(request_id="updateAuthorizationState")
 
     async def _set_tdlib_parameters(self) -> RequestResult:
+        parameters = dict(
+            use_test_dc=self.settings.use_test_dc,
+            database_directory=os.path.join(f"{self.settings.files_directory}", "database"),
+            files_directory=os.path.join(f"{self.settings.files_directory}", "files"),
+            use_file_database=self.settings.use_file_database,
+            use_chat_info_database=self.settings.use_chat_info_database,
+            use_message_database=self.settings.use_message_database,
+            use_secret_chats=self.settings.use_secret_chats,
+            api_id=self.settings.api_id,
+            api_hash=self.settings.api_hash.get_secret_value(),
+            system_language_code=self.settings.system_language_code,
+            device_model=self.settings.device_model,
+            system_version=self.settings.system_version,
+            application_version=self.settings.application_version,
+            enable_storage_optimizer=self.settings.enable_storage_optimizer,
+            ignore_file_names=self.settings.ignore_file_names
+        )
+
         return await self.api.set_tdlib_parameters(
-            parameters=TdlibParameters(
-                use_test_dc=self.settings.use_test_dc,
-                database_directory=os.path.join(f"{self.settings.files_directory}", "database"),
-                files_directory=os.path.join(f"{self.settings.files_directory}", "files"),
-                use_file_database=self.settings.use_file_database,
-                use_chat_info_database=self.settings.use_chat_info_database,
-                use_message_database=self.settings.use_message_database,
-                use_secret_chats=self.settings.use_secret_chats,
-                api_id=self.settings.api_id,
-                api_hash=self.settings.api_hash.get_secret_value(),
-                system_language_code=self.settings.system_language_code,
-                device_model=self.settings.device_model,
-                system_version=self.settings.system_version,
-                application_version=self.settings.application_version,
-                enable_storage_optimizer=self.settings.enable_storage_optimizer,
-                ignore_file_names=self.settings.ignore_file_names
-            ),
+            **parameters,
             request_id="updateAuthorizationState"
         )
 
-    async def _check_database_encryption_key(self) -> RequestResult:
-        self.logger.info('Sending encryption key')
-        result = await self.api.check_database_encryption_key(
-            encryption_key=self.settings.database_encryption_key,
-            request_id="updateAuthorizationState"
-        )
-
-        await self._setup_options()
-        await self._setup_proxy()
-
-        return result
+    # async def _check_database_encryption_key(self) -> RequestResult:
+    #     self.logger.info('Sending encryption key')
+    #     result = await self.api.check_database_encryption_key(
+    #         encryption_key=self.settings.database_encryption_key,
+    #         request_id="updateAuthorizationState"
+    #     )
+    #
+    #     await self._setup_options()
+    #     await self._setup_proxy()
+    #
+    #     return result
 
     async def _set_authentication_phone_number_or_check_bot_token(self) -> RequestResult:
         if self.is_bot:
@@ -1010,7 +1011,7 @@ class Client:
         auth_actions: AuthActionsDict = {
             None: self._auth_start,
             API.Types.AUTHORIZATION_STATE_WAIT_TDLIB_PARAMETERS: self._set_tdlib_parameters,
-            API.Types.AUTHORIZATION_STATE_WAIT_ENCRYPTION_KEY: self._check_database_encryption_key,
+            # API.Types.AUTHORIZATION_STATE_WAIT_ENCRYPTION_KEY: self._check_database_encryption_key,
             API.Types.AUTHORIZATION_STATE_WAIT_PHONE_NUMBER: self._set_authentication_phone_number_or_check_bot_token,
             API.Types.AUTHORIZATION_STATE_WAIT_CODE: self._check_authentication_code,
             API.Types.AUTHORIZATION_STATE_WAIT_REGISTRATION: self._register_user,
